@@ -1,6 +1,9 @@
 import React from "react";
 // We use Route in order to define the different routes of our application
 import { Route, Routes } from "react-router-dom";
+import MbtaAlertsPage from "./components/pages/mbtaAlerts";
+import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
+
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
@@ -31,6 +34,8 @@ const App = () => {
           <Route exact path="/home" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/mbtaAlerts" element={<MbtaAlertsPage />} />
+          <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         </Routes>
       </UserContext.Provider>
