@@ -15,7 +15,7 @@ router.post('/assignAuth', async (req, res) =>
   user = await newUserModel.findOne({ username: username });
 
   //checks if the username exists
-  if (!user)
+  if (!username)
     return res
       .status(406)
       .send({ message: "username not found" });
@@ -38,7 +38,7 @@ router.post('/assignAuth', async (req, res) =>
 
 try {
     const saveAuth = await createAuth.save();
-    res.send(saveNewAuth);
+    res.send(saveAuth);
 } catch (error) {
     res.status(400).send({ message: "Error trying to create new authorizaton" });
 }
@@ -54,7 +54,7 @@ router.get("/getAuthById", async (req, res) => {
     if (err) {
       console.log(err);
     }
-    if (user==null) {
+    if (userId==null) {
       res.status(404).send("userId does not exist.");
     } 
     else {
@@ -81,7 +81,7 @@ router.get("/allUnderAuth", async (req, res) => {
       console.log(err);
     }
     if (user==null) {
-      res.status(9448).send("role does not exist.");
+      res.status(202).send("role does not exist.");
     } 
     else {
       return res.json(user);
