@@ -36,7 +36,7 @@ return (
     ))}
 
 
-      <h1>Alerts!</h1>
+      <h1>Stations!</h1>
     {alerts.map(alert => (
       <div key={alert.id}>
         <h3>{alert.attributes.header}</h3>

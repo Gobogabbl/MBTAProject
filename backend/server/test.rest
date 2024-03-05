@@ -8,6 +8,26 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/user/signup
+Content-Type: application/json 
+
+{
+    "username" : "BigManSquare",
+    "email" : "bigbigman@gmail.com",
+    "password" : "realbigman"
+}
+
+###
+POST http://localhost:8080/user/signup
+Content-Type: application/json 
+
+{
+    "username" : "RemuRimeSlime",
+    "email" : "rurime@gmail.com",
+    "password" : "slimetime"
+}
+
+###
 
 POST http://localhost:8080/user/login
 Content-Type: application/json 
@@ -50,3 +70,44 @@ Content-Type: application/json
 
 ###
 POST  http://localhost:8081/user/deleteAll
+
+//testing for the authorizationRoutes
+###
+POST http://localhost:8081/auth/assignAuth
+Content-Type: application/json
+
+{
+    "userID" : "65e0d6d5923c6fb9837fe209",
+    "username" : "RemuRimeSlime",
+    "authorization" : "Admin"
+}
+
+###
+POST http://localhost:8081/auth/assignAuth
+Content-Type: application/json
+
+{
+    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "username" : "BigManSquare",
+    "authorization" : "User"
+}
+
+###
+GET http://localhost:8081/auth/getAllAuth
+Content-Type: application/json
+
+###
+GET http://localhost:8081/auth/getAuthByID
+Content-Type: application/json
+
+{
+    "userId" : "65e0d3ae923c6fb9837fe1f9"
+}
+
+###
+GET http://localhost:8081/auth/allUnderAuth
+Content-Type: application/json
+
+{
+    "authizationRole" : "Admin"
+}
