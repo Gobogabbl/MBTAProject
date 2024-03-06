@@ -112,6 +112,15 @@ Content-Type: application/json
     "userId" : "65e0d3ae923c6fb9837fe1f9"
 }
 
+//testing a failed request
+###
+GET http://localhost:8081/auth/getAuthByID
+Content-Type: application/json
+
+{
+    "userId" : "65e0d3ae923c6fb9837fe22g5"
+}
+
 ###
 GET http://localhost:8081/auth/allUnderAuth
 Content-Type: application/json
