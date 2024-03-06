@@ -101,6 +101,14 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
+    "userId" : "65e0d6d5923c6fb9837fe209"
+}
+
+###
+GET http://localhost:8081/auth/getAuthByID
+Content-Type: application/json
+
+{
     "userId" : "65e0d3ae923c6fb9837fe1f9"
 }
 

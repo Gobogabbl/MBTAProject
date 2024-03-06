@@ -5,62 +5,75 @@ const newUserModel = require('../models/userModel')
 
 //ROUTE
 //Assigns the authorization of a user
-router.post('/assignAuth', async (req, res) => 
-{
-  // const { error } = userLoginValidation(req.body);
-  // if (error) return res.status(400).send({ message: error.errors[0].message });
+router.post('/assignAuth', async (req, res) => {
+  try {
+    const { username, userID, authorizationRole } = req.body;
 
-  const { username, userID, authorizationRole } = req.body
+    // Check if username and userID are provided
+    if (!username || !userID) {
+      return res.status(400).send({ message: "Both username and userID are required." });
+    }
 
-  user = await newUserModel.findOne({ username: username });
+    // Check if the authorization already exists for the given userID
+    const existingAuth = await authorizationModel.findOne({ userID: userID });
+    if (existingAuth) {
+      return res.status(409).send({ message: "Authorization already exists for the given userID." });
+    }
 
-  //checks if the username exists
-  if (!username)
-    return res
-      .status(406)
-      .send({ message: "username not found" });
+    // Check if the user with the specified username exists
+    const user = await newUserModel.findOne({ username: username });
+    if (!user) {
+      return res.status(404).send({ message: "User not found with the specified username." });
+    }
 
-  user = await newUserModel.findOne({ userID: userID });
+    // Create and save the authorization for the user
+    const createAuth = new authorizationModel({
+      username: username,
+      userID: userID,
+      authorizationRole: authorizationRole
+    });
 
-  //checks if the userID exists
-  if(!userID)
-    return res
-      .status(404)
-      .send({message: "userID not found"})
-
-  //creates the authorization for the user
-  const createAuth = new authorizationModel
-  ({
-    username: username,
-    userID: userID,
-    authorizationRole: authorizationRole
-});
-
-try {
     const saveAuth = await createAuth.save();
-    res.send(saveAuth);
-} catch (error) {
-    res.status(400).send({ message: "Error trying to create new authorizaton" });
-}
-
-})
+    res.status(201).send(saveAuth);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
 
 //ROUTE
 //gets a user's authorization
 router.get("/getAuthById", async (req, res) => {
-  var { userId } = req.body;
+  try {
+    const { userId } = req.body;
 
-  newUserModel.findById(userId, function (err, user) {
-    if (err) {
-      console.log(err);
+    // Check if userId is provided
+    if (!userId) {
+      return res.status(400).json({ error: "userId is required." });
     }
-    if (userId==null) {
-      res.status(404).send("userId does not exist.");
-    } 
-    else {
-      return res.json(user);
+
+    // Find the user by userId
+    const user = await newUserModel.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
     }
-  });
+
+    // Find the authorization information for the user
+    const auth = await authorizationModel.findOne({ userId: userId });
+
+    // Check if authorization information exists
+    if (!auth) {
+      return res.status(404).json({ error: "Authorization not found for the user." });
+    }
+
+    // Return the user and authorization information
+    return res.json({ user, auth });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
 //ROUTE
@@ -80,9 +93,17 @@ router.get("/allUnderAuth", async (req, res) => {
     if (err) {
       console.log(err);
     }
-    if (user==null) {
+    if (user!="Admin" ||user!="User") {
       res.status(202).send("role does not exist.");
+    }
+    if(user=="Admin")
+    {
+      
     } 
+    if(user=="User")
+    {
+
+    }
     else {
       return res.json(user);
     }
