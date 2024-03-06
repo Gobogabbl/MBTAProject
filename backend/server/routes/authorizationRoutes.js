@@ -43,6 +43,39 @@ router.post('/assignAuth', async (req, res) => {
 
 //ROUTE
 //gets a user's authorization
+// router.get("/getAuthById", async (req, res) => {
+//   try {
+//     const { userId } = req.body;
+
+//     // Check if userId is provided
+//     if (!userId) {
+//       return res.status(400).json({ error: "userId is required." });
+//     }
+
+//     // Find the user by userId
+//     const user = await newUserModel.findById(userId);
+
+//     // Check if the user exists
+//     if (!user) {
+//       return res.status(404).json({ error: "User not found." });
+//     }
+
+//     // Find the authorization information for the user
+//     const auth = await authorizationModel.findOne({ userId: userId });
+
+//     // Check if authorization information exists
+//     if (!auth) {
+//       return res.status(404).json({ error: "Authorization not found for the user." });
+//     }
+
+//     // Return the user and authorization information
+//     return res.json({ user, auth });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "Internal Server Error" });
+//   }
+// });
+
 router.get("/getAuthById", async (req, res) => {
   try {
     const { userId } = req.body;
@@ -61,7 +94,7 @@ router.get("/getAuthById", async (req, res) => {
     }
 
     // Find the authorization information for the user
-    const auth = await authorizationModel.findOne({ userId: userId });
+    const auth = await authorizationModel.findOne({ userID: userId }); // Change to 'userID' if that's the field name
 
     // Check if authorization information exists
     if (!auth) {
