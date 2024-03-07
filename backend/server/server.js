@@ -12,6 +12,12 @@ const getAllAuthRoute = require('./routes/authorizationRoutes')
 const assignAuth = require('./routes/authorizationRoutes')
 const getAuthByID = require('./routes/authorizationRoutes')
 const allUnderAuth = require('./routes/authorizationRoutes')
+const createCart = require('./routes/cartCreateCart')
+const getTickets = require('./routes/cartGetTickets')
+const clearCart = require('./routes/cartClearCart')
+const reduceCart = require('./routes/cartReduceCart')
+const increaseCart = require('./routes/cartIncreaseCart')
+const deleteCarts = require('./routes/cartDeleteCarts')
 
 require('dotenv').config();
 const SERVER_PORT = 8081
@@ -29,6 +35,12 @@ app.use('/auth', getAllAuthRoute)
 app.use('/auth', assignAuth)
 app.use('/auth', getAuthByID)
 app.use('/auth', allUnderAuth)
+app.use('/cart', getTickets)
+app.use('/cart', clearCart)
+app.use('/cart', reduceCart)
+app.use('/cart', increaseCart)
+app.use('/cart', createCart)
+app.use('/cart', deleteCarts)
 
 app.listen(SERVER_PORT, (req, res) => {
     console.log(`The backend service is running on port ${SERVER_PORT} and waiting for requests.`);

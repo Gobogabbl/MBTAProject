@@ -128,3 +128,52 @@ Content-Type: application/json
 {
     "authorizationRole" : "User"
 }
+
+
+###
+POST http://localhost:8081/cart/createCart
+Content-Type: application/json
+
+{
+    "username" : "hi"
+}
+
+###
+GET http://localhost:8081/cart/getTickets
+Content-Type: application/json
+
+{
+    "userId" : "65e97f51a0a00cd111ab84b8"
+}
+
+###
+POST http://localhost:8081/cart/clearCart
+Content-Type: application/json
+
+{
+    "userId" : "65e908894ebdb3d82e032c1c"
+}
+
+###
+POST http://localhost:8081/cart/reduceCart
+Content-Type: application/json
+
+{
+    "userId" : "65e97f51a0a00cd111ab84b8",
+    "username" : "hi",
+    "quantity" : 1
+}
+
+###
+POST http://localhost:8081/cart/increaseCart
+Content-Type: application/json
+
+{
+    "userId" : "65e9147b37055f4fab0e9a10",
+    "username" : "10000000",
+    "quantity" : 3
+}
+
+###
+POST http://localhost:8081/cart/deleteCarts
+Content-Type:  application/json
