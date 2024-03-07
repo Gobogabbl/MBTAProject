@@ -78,36 +78,54 @@ router.get("/getAuthById", async (req, res) => {
 
 //ROUTE
 //retrieves all the users and authorizations
-router.get('/getAllAuth', async (req, res) => 
-{
-    const auth = await authorizationModel.find();
-    return res.json(auth)
-  })
+router.get('/getAllAuth', async (req, res) => {
+  try {
+    // Use aggregate to group by userID and get the latest authorization entry
+    const auth = await authorizationModel.aggregate([
+      {
+        $group: {
+          _id: '$userID',
+          latestAuth: { $last: '$$ROOT' } // Get the latest authorization entry for each user
+        }
+      },
+      {
+        $replaceRoot: { newRoot: '$latestAuth' } // Replace the root document with the latestAuth
+      }
+    ]);
+
+    return res.json(auth);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 //ROUTE
 //retrieves all users under a certain authorization(User or Admin)
 router.get("/allUnderAuth", async (req, res) => {
-  var { authorizationRole } = req.body;
+  try {
+    const { authorizationRole } = req.body;
 
-  newUserModel.findById(authorizationRole, function (err, user) {
-    if (err) {
-      console.log(err);
+    // Check if authorizationRole is provided and valid
+    if (!authorizationRole || (authorizationRole !== "Admin" && authorizationRole !== "User")) {
+      return res.status(400).json({ error: "Invalid authorization role." });
     }
-    if (user!="Admin" ||user!="User") {
-      res.status(202).send("role does not exist.");
-    }
-    if(user=="Admin")
-    {
-      
-    } 
-    if(user=="User")
-    {
 
+    // Find the user by authorizationRole
+    const users = await newUserModel.find({ authorizationRole: authorizationRole });
+
+    // Check if users exist
+    if (!users || users.length === 0) {
+      return res.status(404).json({ error: `No users found with the role ${authorizationRole}.` });
     }
-    else {
-      return res.json(user);
-    }
-  });
+
+    // Return the user(s)
+    return res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
+
 
   module.exports = router;

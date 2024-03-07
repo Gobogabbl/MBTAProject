@@ -126,5 +126,5 @@ GET http://localhost:8081/auth/allUnderAuth
 Content-Type: application/json
 
 {
-    "authizationRole" : "Admin"
+    "authorizationRole" : "User"
 }
