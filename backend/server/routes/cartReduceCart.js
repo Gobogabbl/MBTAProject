@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
-router.post("/increaseCart", async (req, res) => {
+router.post("/reduceCart", async (req, res) => {
     const { userId, username, quantity } = req.body;
 
     // Check if quantity is a valid number

@@ -135,7 +135,7 @@ POST http://localhost:8081/cart/createCart
 Content-Type: application/json
 
 {
-    "username" : "hi"
+    "username" : "hiii"
 }
 
 ###
@@ -143,7 +143,7 @@ GET http://localhost:8081/cart/getTickets
 Content-Type: application/json
 
 {
-    "userId" : "65e97f51a0a00cd111ab84b8"
+    "userId" : "65e9f0517736c6bd3a66320c"
 }
 
 ###
@@ -159,7 +159,7 @@ POST http://localhost:8081/cart/reduceCart
 Content-Type: application/json
 
 {
-    "userId" : "65e97f51a0a00cd111ab84b8",
+    "userId" : "65e9f0517736c6bd3a66320c",
     "username" : "hi",
     "quantity" : 1
 }
@@ -169,8 +169,8 @@ POST http://localhost:8081/cart/increaseCart
 Content-Type: application/json
 
 {
-    "userId" : "65e9147b37055f4fab0e9a10",
-    "username" : "10000000",
+    "userId" : "65e9f1408e00989f18bcc2b7",
+    "username" : "hiii",
     "quantity" : 3
 }
 
