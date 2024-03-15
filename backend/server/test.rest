@@ -130,6 +130,7 @@ Content-Type: application/json
 }
 
 
+//testing for the shopping cart routes
 ###
 POST http://localhost:8081/cart/createCart
 Content-Type: application/json
