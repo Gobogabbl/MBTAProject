@@ -113,15 +113,15 @@ router.get("/allUnderAuth", async (req, res) => {
     }
 
     // Find the user by authorizationRole
-    const users = await newUserModel.find({ authorizationRole: authorizationRole });
+    const user = await newUserModel.find({ authorizationRole: authorizationRole });
 
     // Check if users exist
-    if (!users || users.length === 0) {
+    if (!user || user.length === 0) {
       return res.status(404).json({ error: `No users found with the role ${authorizationRole}.` });
     }
 
     // Return the user(s)
-    return res.json(users);
+    return res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -133,15 +133,15 @@ router.get("/allUnderAuth", async (req, res) => {
 router.post('/deleteAuth', async (req, res) => {
 
   // extract user information
-  const { userId, username } = req.body;
+  const { userId, user} = req.body;
 
   // Check if userId is provided
   if (!userId) {
     return res.status(400).json({ error: "userId is required." });
   }
 
-  // Find the user by userId
-  const user = await newUserModel.findById(userId);
+  // // Find the user by userId
+  // const user = await newUserModel.findById(userId);
 
   // Check if the user exists
   if (!user) {
