@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authorizationModel = require('../models/authorizationModel')
 const newUserModel = require('../models/userModel')
+const newUserValidation = require('../models/userValidator')
 
 //ROUTE
 //Assigns the authorization of a user
@@ -124,6 +125,40 @@ router.get("/allUnderAuth", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//ROUTE
+//Deletes a user's authorization so that another can be assigned to them
+router.post('/deleteAuth', async (req, res) => {
+
+  // extract user information
+  const { userId, username } = req.body;
+
+  // Check if userId is provided
+  if (!userId) {
+    return res.status(400).json({ error: "userId is required." });
+  }
+
+  // Find the user by userId
+  const user = await newUserModel.findById(userId);
+
+  // Check if the user exists
+  if (!user) {
+    return res.status(404).json({ error: "User not found." });
+  }
+
+  // remove the authorization role
+  user.authorizationRole = undefined;
+
+  try {
+      // save the updated user information
+      await user.save();
+
+  } 
+  catch (err) {
+      console.log(err);
+      return res.status(500).send({ message: "Internal server error" });
   }
 });
 

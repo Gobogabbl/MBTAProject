@@ -129,6 +129,16 @@ Content-Type: application/json
     "authorizationRole" : "User"
 }
 
+###
+POST http://localhost:8081/auth/deleteAuth
+Content-Type: application/json
+
+{
+    "userId" : "65e0d3ae923c6fb9837fe1f9",
+    "username" : "BigManSquare"
+    
+}
+
 
 //testing for the shopping cart routes
 ###
@@ -139,6 +149,7 @@ Content-Type: application/json
     "username" : "hiii"
 }
 
+//testing for getTickets
 ###
 GET http://localhost:8081/cart/getTickets
 Content-Type: application/json
@@ -147,6 +158,7 @@ Content-Type: application/json
     "userId" : "65e9f0517736c6bd3a66320c"
 }
 
+//testing for clearCart, reduceCart, increaseCart and deleteCarts
 ###
 POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
