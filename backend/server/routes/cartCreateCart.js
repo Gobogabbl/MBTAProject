@@ -4,17 +4,18 @@ const z = require('zod')
 const newCart = require('../models/shoppingCartModel')
 
 router.post('/createCart', async (req, res) => {
-    const { username } = req.body
+    const { username, userID } = req.body
 
     //check if cart already exists
-    const user = await newCart.findOne({ username: username })
+    const user = await newCart.findOne({ username: username, userID: userID })
     if (user)
-        return res.status(409).send({ message: "Username is taken, pick another" })
+        return res.status(409).send({ message: "User is taken, pick another" })
 
 
     //creates a new user
     const createUser = new newCart({
         username: username,
+        userID: userID,
         quantity: 1,
     });
 
