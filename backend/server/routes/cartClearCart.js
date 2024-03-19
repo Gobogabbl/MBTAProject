@@ -3,12 +3,12 @@ const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
 router.post("/clearCart", async (req, res) => {
-    const { userID, username, date } = req.body;
+    const { userID, username } = req.body;
 
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
             { userID: userID }, // Query object to find the document
-            { username: username, date: date, quantity: 0 }, // Update object
+            { username: username, quantity: 0 }, // Update object
             { new: true } // Options object to return the modified document
         );
 
