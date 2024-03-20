@@ -101,7 +101,7 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userId" : "65e0d6d5923c6fb9837fe209"
+    "userID" : "65e0d6d5923c6fb9837fe209"
 }
 
 ###
@@ -109,7 +109,7 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userId" : "65e0d3ae923c6fb9837fe1f9"
+    "userID" : "65e0d3ae923c6fb9837fe1f9"
 }
 
 //testing a failed request
@@ -118,7 +118,7 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userId" : "65e0d3ae923c6fb9837fe22g5"
+    "userID" : "65e0d3ae923c6fb9837fe22g5"
 }
 
 ###
