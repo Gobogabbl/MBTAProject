@@ -8,12 +8,7 @@ const newUserValidation = require('../models/userValidator')
 //Assigns the authorization of a user
 router.post('/assignAuth', async (req, res) => {
   try {
-    const { username, userID, authorizationRole } = req.body;
-
-    // Check if username and userID are provided
-    if (!username || !userID) {
-      return res.status(400).send({ message: "Both username and userID are required." });
-    }
+    const { userID, authorizationRole } = req.body;
 
     // Check if the authorization already exists for the given userID
     const existingAuth = await authorizationModel.findOne({ userID: userID });
@@ -21,15 +16,8 @@ router.post('/assignAuth', async (req, res) => {
       return res.status(409).send({ message: "Authorization already exists for the given userID." });
     }
 
-    // Check if the user with the specified username exists
-    const user = await newUserModel.findOne({ username: username });
-    if (!user) {
-      return res.status(404).send({ message: "User not found with the specified username." });
-    }
-
     // Create and save the authorization for the user
     const createAuth = new authorizationModel({
-      username: username,
       userID: userID,
       authorizationRole: authorizationRole
     });
