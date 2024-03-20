@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authorizationModel = require('../models/authorizationModel')
-const newUserModel = require('../models/userModel')
-const newUserValidation = require('../models/userValidator')
+const authModel = require('../models/authorizationModel')
 
 //ROUTE
 //Assigns the authorization of a user
@@ -42,7 +41,7 @@ router.get("/getAuthById", async (req, res) => {
     }
 
     // Find the user by userId
-    const user = await newUserModel.findById(userId);
+    const user = await authModel.findById(userId);
 
     // Check if the user exists
     if (!user) {
@@ -101,7 +100,7 @@ router.get("/allUnderAuth", async (req, res) => {
     }
 
     // Find the user by authorizationRole
-    const user = await newUserModel.find({ authorizationRole: authorizationRole });
+    const user = await authModel.find({ authorizationRole: authorizationRole });
 
     // Check if users exist
     if (!user || user.length === 0) {
