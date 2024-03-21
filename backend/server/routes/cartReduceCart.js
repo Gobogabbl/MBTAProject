@@ -3,21 +3,28 @@ const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
 router.post("/reduceCart", async (req, res) => {
-    const { userId, username, quantity } = req.body;
+    const { userId, username } = req.body;
 
-    // Check if quantity is a valid number
-    if (isNaN(quantity)) {
-        return res.status(400).send("Invalid quantity value.");
+    try {
+        const user = await shoppingCart.findOne({ userId: userId });
+        if (!user) {
+            return res.status(404).send("User with userId does not exist.");
+        } else {
+            var quantity = user.quantity;
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(500).send("Internal Server Error");
     }
 
-    var newQuantity = parseInt(quantity, 10) - 1;
+    var newQuantity = quantity - 1;
 
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
             { userId: userId },
             {
                 username: username,
-                quantity: newQuantity,
+                quantity: newQuantity
             },
             { new: true }
         );

@@ -173,8 +173,7 @@ Content-Type: application/json
 
 {
     "username" : "new",
-    "userID" : "1",
-    "quantity" : 3
+    "userID" : "1"
 }
 
 ###
@@ -183,8 +182,16 @@ Content-Type: application/json
 
 {
     "username" : "new",
-    "userID" : "1",
-    "quantity" : 3
+    "userID" : "1"
+}
+
+###
+POST http://localhost:8081/cart/tempIncrease
+Content-Type: application/json
+
+{
+    "username" : "new",
+    "userID" : "1"
 }
 
 ###
