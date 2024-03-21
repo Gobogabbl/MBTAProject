@@ -126,7 +126,7 @@ GET http://localhost:8081/auth/allUnderAuth
 Content-Type: application/json
 
 {
-    "authorizationRole" : "User"
+    "authorizationRole" : "Admin"
 }
 
 ###
@@ -134,8 +134,7 @@ POST http://localhost:8081/auth/deleteAuth
 Content-Type: application/json
 
 {
-    "userId" : "65e0d3ae923c6fb9837fe1f9",
-    "username" : "BigManSquare"
+    "userID" : "65e0d3ae923c6fb9837fe1f9"
 }
 
 
