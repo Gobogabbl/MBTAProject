@@ -9,7 +9,7 @@ router.delete('/deleteUsedTickets', async (req, res) => {
         const ticketOrders = await TicketOrder.find({userID});
 
         if (ticketOrders.length === 0) {
-            return res.status(404).json({error: "No tickets found for user"});
+            return res.status(404).json({error: "No tickets found"});
         }
 
         const currentTime = new Date();
