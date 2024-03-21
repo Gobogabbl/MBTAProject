@@ -4,12 +4,12 @@ const TicketOrder = require('../models/ticketOrderModel');
 
 router.delete('/deleteUsedTickets', async (req, res) => {
     try {
-        const {username} = req.params;
+        const {userID} = req.params;
 
-        const ticketOrders = await TicketOrder.find({username});
+        const ticketOrders = await TicketOrder.find({userID});
 
         if (ticketOrders.length === 0) {
-            return res.status(404).json({error: "No username found"});
+            return res.status(404).json({error: "No user ID found"});
         }
 
         const currentTime = new Date();
