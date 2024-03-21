@@ -120,15 +120,15 @@ router.get("/allUnderAuth", async (req, res) => {
 router.post('/deleteAuth', async (req, res) => {
 
   // extract user information
-  const { userId, user} = req.body;
+  const { userID } = req.body;
 
   // Check if userId is provided
-  if (!userId) {
+  if (!userID) {
     return res.status(400).json({ error: "userId is required." });
   }
 
-  // // Find the user by userId
-  // const user = await newUserModel.findById(userId);
+  // Find the user by userId
+  const user = await authModel.findById(userID);
 
   // Check if the user exists
   if (!user) {
