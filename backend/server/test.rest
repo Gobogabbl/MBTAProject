@@ -72,24 +72,44 @@ Content-Type: application/json
 POST  http://localhost:8081/user/deleteAll
 
 //testing for the authorizationRoutes
+//test for Remu
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
     "userID" : "65e0d6d5923c6fb9837fe209",
-    
     "authorizationRole" : "Admin"
 }
 
+//testing fail case
+###
+POST http://localhost:8081/auth/assignAuth
+Content-Type: application/json
+
+{
+    "userID" : "65e0d6d5923c6fb9837fe003",
+    "authorizationRole" : "Admin"
+}
+
+//test for BigMan
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
     "userID" : "65e0d3ae923c6fb9837fe1f9",
-    
     "authorizationRole" : "User"
+}
+
+//test for gobblgabble
+###
+POST http://localhost:8081/auth/assignAuth
+Content-Type: application/json
+
+{
+    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "authorizationRole" : "Admin"
 }
 
 ###
@@ -126,7 +146,7 @@ GET http://localhost:8081/auth/allUnderAuth
 Content-Type: application/json
 
 {
-    "authorizationRole" : "Admin"
+    "authorizationRole" : "User"
 }
 
 ###
