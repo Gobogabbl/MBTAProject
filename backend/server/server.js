@@ -19,6 +19,10 @@ const clearCart = require('./routes/cartClearCart')
 const reduceCart = require('./routes/cartReduceCart')
 const increaseCart = require('./routes/cartIncreaseCart')
 const deleteCarts = require('./routes/cartDeleteCarts')
+const getUserID = require('./routes/ticketOrdersGetUserID')
+const getUsername = require('./routes/ticketOrdersGetUsername')
+const postTicketUsage = require('./routes/ticketOrdersPostTicketUsage')
+const deleteUsedTickets = require('./routes/ticketOrdersDeleteUsedTickets')
 
 require('dotenv').config();
 const SERVER_PORT = 8081
@@ -43,6 +47,10 @@ app.use('/cart', reduceCart)
 app.use('/cart', increaseCart)
 app.use('/cart', createCart)
 app.use('/cart', deleteCarts)
+app.use('/MBTAuser', getUserID)
+app.use('/MBTAuser', getUsername)
+app.use('/MBTAuser', postTicketUsage)
+app.use('/MBTAuser', deleteUsedTickets)
 
 app.listen(SERVER_PORT, (req, res) => {
     console.log(`The backend service is running on port ${SERVER_PORT} and waiting for requests.`);
