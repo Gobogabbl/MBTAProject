@@ -149,6 +149,7 @@ Content-Type: application/json
     "authorizationRole" : "User"
 }
 
+//deletes authorization for BigManSquare
 ###
 POST http://localhost:8081/auth/deleteAuth
 Content-Type: application/json
