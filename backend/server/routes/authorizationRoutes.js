@@ -66,22 +66,25 @@ router.get("/getAuthById", async (req, res) => {
 
 //ROUTE
 //retrieves all the users and authorizations
-router.get('/getAllAuth', async (req, res) => {
+router.get("/getAuthById", async (req, res) => {
   try {
-    // Use aggregate to group by userID and get the latest authorization entry
-    const auth = await authorizationModel.aggregate([
-      {
-        $group: {
-          _id: '$userID',
-          latestAuth: { $last: '$$ROOT' } // Get the latest authorization entry for each user
-        }
-      },
-      {
-        $replaceRoot: { newRoot: '$latestAuth' } // Replace the root document with the latestAuth
-      }
-    ]);
+    const { userID } = req.body;
 
-    return res.json(auth);
+    // Check if userId is provided
+    if (!userID) {
+      return res.status(400).json({ error: "userID is required." });
+    }
+
+    // Find the user's authorization by userID
+    const auth = await authorizationModel.findOne({ userID: userID });
+
+    // Check if the authorization exists
+    if (!auth) {
+      return res.status(404).json({ error: "Authorization not found for the user." });
+    }
+
+    // Return the authorization information
+    return res.json({ auth });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -118,34 +121,26 @@ router.get("/allUnderAuth", async (req, res) => {
 //ROUTE
 //Deletes a user's authorization so that another can be assigned to them
 router.post('/deleteAuth', async (req, res) => {
-
-  // extract user information
-  const { userID } = req.body;
-
-  // Check if userId is provided
-  if (!userID) {
-    return res.status(400).json({ error: "userId is required." });
-  }
-
-  // Find the user by userId
-  const user = await authModel.findById(userID);
-
-  // Check if the user exists
-  if (!user) {
-    return res.status(404).json({ error: "User not found." });
-  }
-
-  // remove the authorization role
-  user.authorizationRole = undefined;
-
   try {
-      // save the updated user information
-      await user.save();
+    const { userID } = req.body;
 
-  } 
-  catch (err) {
-      console.log(err);
-      return res.status(500).send({ message: "Internal server error" });
+    // Check if userId is provided
+    if (!userID) {
+      return res.status(400).json({ error: "userID is required." });
+    }
+
+    // Find and delete the authorization for the user
+    const deletedAuth = await authorizationModel.findOneAndDelete({ userID: userID });
+
+    // Check if the authorization was found and deleted
+    if (!deletedAuth) {
+      return res.status(404).json({ error: "Authorization not found for the user." });
+    }
+
+    return res.json({ message: "Authorization deleted successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

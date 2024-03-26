@@ -102,13 +102,13 @@ Content-Type: application/json
     "authorizationRole" : "User"
 }
 
-//test for gobblgabble
+//test for robbert
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "userID" : "65fc6c850fc37441469227e7",
     "authorizationRole" : "Admin"
 }
 
@@ -222,7 +222,7 @@ GET  http://localhost:8081/MBTAuser/getUserID
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
 
 ###
@@ -239,7 +239,7 @@ POST http://localhost:8081/MBTAuser/ticketUsage
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
 
 ###
@@ -247,5 +247,5 @@ DELETE http://localhost:8081/MBTAuser/deleteUsedTickets
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
