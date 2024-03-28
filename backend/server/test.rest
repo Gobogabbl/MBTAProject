@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ###
-POST  http://localhost:8081/user/deleteAll
+POST  http://localhost:8080/user/deleteAll
 
 //testing for the authorizationRoutes
 //test for Remu
@@ -79,6 +79,7 @@ Content-Type: application/json
 
 {
     "userID" : "66030412fb3f77975f646508",
+    "username" : "RemuRimeSlime",
     "authorizationRole" : "Admin"
 }
 
@@ -89,6 +90,7 @@ Content-Type: application/json
 
 {
     "userID" : "65e0d6d5923c6fb9837fe003",
+    "username" : "Kobati",
     "authorizationRole" : "Admin"
 }
 
@@ -99,6 +101,7 @@ Content-Type: application/json
 
 {
     "userID" : "660303d8fb3f77975f646504",
+    "username" : "BigManSquare",
     "authorizationRole" : "User"
 }
 
@@ -109,7 +112,8 @@ Content-Type: application/json
 
 {
     "userID" : "65fc6c850fc37441469227e7",
-    "authorizationRole" : "Admin"
+    "username" : "Robert Swifflebottom",
+    "authorizationRole" : "User"
 }
 
 ###
