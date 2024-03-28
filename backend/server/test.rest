@@ -1,4 +1,4 @@
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/user/login
+POST http://localhost:8081/user/login
 Content-Type: application/json 
 
 {
@@ -78,7 +78,7 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d6d5923c6fb9837fe209",
+    "userID" : "66030412fb3f77975f646508",
     "authorizationRole" : "Admin"
 }
 
@@ -98,7 +98,7 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "userID" : "660303d8fb3f77975f646504",
     "authorizationRole" : "User"
 }
 
@@ -116,6 +116,7 @@ Content-Type: application/json
 GET http://localhost:8081/auth/getAllAuth
 Content-Type: application/json
 
+//get auth of Remu
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
@@ -124,6 +125,7 @@ Content-Type: application/json
     "userID" : "65e0d6d5923c6fb9837fe209"
 }
 
+//get auth of BigMan
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json

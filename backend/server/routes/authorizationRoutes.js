@@ -9,10 +9,9 @@ router.post('/assignAuth', async (req, res) => {
   try {
     const { userID, authorizationRole } = req.body;
 
-    // Check if the authorization already exists for the given userID
-    const existingAuth = await authorizationModel.findOne({ userID: userID });
-    if (existingAuth) {
-      return res.status(409).send({ message: "Authorization already exists for the given userID." });
+    // Check if userID and authorizationRole are provided
+    if (!userID || !authorizationRole) {
+      return res.status(400).json({ error: "userID and authorizationRole are required." });
     }
 
     // Create and save the authorization for the user
@@ -21,11 +20,11 @@ router.post('/assignAuth', async (req, res) => {
       authorizationRole: authorizationRole
     });
 
-    const saveAuth = await createAuth.save();
-    res.status(201).send(saveAuth);
+    const savedAuth = await createAuth.save();
+    return res.status(201).json(savedAuth);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
