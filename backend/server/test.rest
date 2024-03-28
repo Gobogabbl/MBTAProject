@@ -126,7 +126,7 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "65e0d6d5923c6fb9837fe209"
+    "userID" : "66030412fb3f77975f646508"
 }
 
 //get auth of BigMan
@@ -135,7 +135,7 @@ GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9"
+    "userID" : "660303d8fb3f77975f646504"
 }
 
 //testing a failed request
@@ -161,7 +161,7 @@ POST http://localhost:8081/auth/deleteAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9"
+    "userID" : "660303d8fb3f77975f646504"
 }
 
 

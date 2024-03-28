@@ -18,7 +18,7 @@ router.post('/assignAuth', async (req, res) => {
     // Check if the user exists
     const existingUser = await newUserModel.findOne({ username: username });
     if (!existingUser) {
-      return res.status(404).json({ error: "User not found with the provided userID." });
+      return res.status(404).json({ error: "User not found with the provided username." });
     }
 
     // Check if the user already has the authorizationRole
