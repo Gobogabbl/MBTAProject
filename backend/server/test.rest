@@ -159,7 +159,7 @@ Content-Type: application/json
 }
 
 
-//testing for the shopping cart routes
+//testing for creating a shopping cart
 ###
 POST http://localhost:8081/cart/createCart
 Content-Type: application/json
@@ -169,16 +169,24 @@ Content-Type: application/json
     "userID" : "1"
 }
 
-//testing for getTickets
+//testing for get methods
 ###
-GET http://localhost:8081/cart/getTickets
+GET http://localhost:8081/cart/getOneWay
 Content-Type: application/json
 
 {
     "userID" : "1"
 }
 
-//testing for clearCart, reduceCart, increaseCart and deleteCarts
+###
+GET http://localhost:8081/cart/getWeekendPass
+Content-Type: application/json
+
+{
+    "userID" : "1"
+}
+
+//testing for clearCart, reduce/increase, and deleteCarts
 ###
 POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
@@ -188,29 +196,34 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8081/cart/reduceCart
+POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/increaseCart
+POST http://localhost:8081/cart/reduceWP
 Content-Type: application/json
 
 {
-    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/tempIncrease
+POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "username" : "new",
+    "userID" : "1"
+}
+
+###
+POST http://localhost:8081/cart/increaseWP
+Content-Type: application/json
+
+{
     "userID" : "1"
 }
 

@@ -9,17 +9,22 @@ const shoppingCartSchema = new mongoose.Schema(
       label: "username",
     },
 
-    userID: 
-    {
+    userID: {
       type: String,
       required: true,
       label: "userID",
     },
     
-    quantity: {
+    crOneWay: {
         type: Number,
         required: true,
         label: "quantity",
+    },
+
+    crWeekendPass: {
+      type: Number,
+      required: true,
+      label: "quantity",
     },
   },
   { collection: "carts" }

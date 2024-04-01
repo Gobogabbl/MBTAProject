@@ -16,7 +16,8 @@ router.post('/createCart', async (req, res) => {
     const createUser = new newCart({
         username: username,
         userID: userID,
-        quantity: 1,
+        crOneWay: 0,
+        crWeekendPass: 0,
     });
 
    

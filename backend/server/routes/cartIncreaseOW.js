@@ -2,29 +2,32 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
-router.post("/increaseCart", async (req, res) => {
-    const { userId, username } = req.body;
+router.post("/increaseOW", async (req, res) => {
+    const { userId } = req.body;
 
     try {
         const user = await shoppingCart.findOne({ userId: userId });
         if (!user) {
             return res.status(404).send("User with userId does not exist.");
         } else {
-            var quantity = user.quantity;
+            var username = user.username;
+            var crOneWay = user.crOneWay;
+            var crWeekendPass = user.crWeekendPass;
         }
     } catch (err) {
         console.log(err);
         return res.status(500).send("Internal Server Error");
     }
 
-    var newQuantity = quantity + 1;
+    var newOneWay = crOneWay + 1;
 
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
             { userId: userId },
             {
                 username: username,
-                quantity: newQuantity
+                crOneWay: newOneWay,
+                crWeekendPass: crWeekendPass
             },
             { new: true }
         );
