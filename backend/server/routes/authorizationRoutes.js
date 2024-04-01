@@ -2,14 +2,26 @@ const express = require("express");
 const router = express.Router();
 const authorizationModel = require('../models/authorizationModel')
 const authModel = require('../models/authorizationModel')
+const newUserModel = require('../models/userModel')
 
 //ROUTE
 //Assigns the authorization of a user
 router.post('/assignAuth', async (req, res) => {
   try {
-    const { userID, authorizationRole } = req.body;
+    const { userID, username, authorizationRole } = req.body;
 
-    // Check if the authorization already exists for the given userID
+    // Check if userID, username, and authorizationRole are provided
+    if (!userID || !username || !authorizationRole) {
+      return res.status(400).json({ error: "userID, username, and authorizationRole are required." });
+    }
+
+    // Check if the user exists
+    const existingUser = await newUserModel.findOne({ username: username });
+    if (!existingUser) {
+      return res.status(404).json({ error: "User not found with the provided username." });
+    }
+
+    // Check if the user already has the authorizationRole
     const existingAuth = await authorizationModel.findOne({ userID: userID });
     if (existingAuth) {
       return res.status(409).send({ message: "Authorization already exists for the given userID." });
@@ -18,14 +30,15 @@ router.post('/assignAuth', async (req, res) => {
     // Create and save the authorization for the user
     const createAuth = new authorizationModel({
       userID: userID,
+      username: username,
       authorizationRole: authorizationRole
     });
 
-    const saveAuth = await createAuth.save();
-    res.status(201).send(saveAuth);
+    const savedAuth = await createAuth.save();
+    return res.status(201).json(savedAuth);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ message: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
