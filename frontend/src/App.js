@@ -3,7 +3,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
-
+import AuthorizationPage from "./components/pages/authorizationsPage";
+import CartTicketSelection from "./components/pages/cartTicketSelection";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
@@ -36,6 +37,8 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/mbtaAlerts" element={<MbtaAlertsPage />} />
           <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
+          <Route exact path="/cartTicketSelection" element={<CartTicketSelection />} />
+          <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         </Routes>
       </UserContext.Provider>

@@ -8,7 +8,7 @@ router.post("/clearCart", async (req, res) => {
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
             { userID: userID }, // Query object to find the document
-            { username: username, quantity: 0 }, // Update object
+            { username: username, crOneWay: 0, crWeekendPass: 0 }, // Update object
             { new: true } // Options object to return the modified document
         );
 

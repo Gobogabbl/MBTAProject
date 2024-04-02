@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require("../models/shoppingCartModel");
 
-router.get('/getTickets', async (req, res) => {
+router.get('/getOneWay', async (req, res) => {
     const { userId } = req.body;
 
     try {
@@ -10,8 +10,8 @@ router.get('/getTickets', async (req, res) => {
         if (!user) {
             return res.status(404).send("User with userId does not exist.");
         } else {
-            const quantity = user.quantity;
-            return res.json(quantity);
+            const crOneWay = user.crOneWay;
+            return res.json(crOneWay);
         }
     } catch (err) {
         console.log(err);

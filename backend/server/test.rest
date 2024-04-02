@@ -1,4 +1,4 @@
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/user/signup
+POST http://localhost:8081/user/signup
 Content-Type: application/json 
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/user/login
+POST http://localhost:8081/user/login
 Content-Type: application/json 
 
 {
@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ###
-POST  http://localhost:8081/user/deleteAll
+POST  http://localhost:8080/user/deleteAll
 
 //testing for the authorizationRoutes
 //test for Remu
@@ -78,7 +78,8 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d6d5923c6fb9837fe209",
+    "userID" : "66030412fb3f77975f646508",
+    "username" : "RemuRimeSlime",
     "authorizationRole" : "Admin"
 }
 
@@ -89,6 +90,7 @@ Content-Type: application/json
 
 {
     "userID" : "65e0d6d5923c6fb9837fe003",
+    "username" : "Kobati",
     "authorizationRole" : "Admin"
 }
 
@@ -98,38 +100,42 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "userID" : "660303d8fb3f77975f646504",
+    "username" : "BigManSquare",
     "authorizationRole" : "User"
 }
 
-//test for gobblgabble
+//test for robbert
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9",
-    "authorizationRole" : "Admin"
+    "userID" : "65fc6c850fc37441469227e7",
+    "username" : "Robert Swifflebottom",
+    "authorizationRole" : "User"
 }
 
 ###
 GET http://localhost:8081/auth/getAllAuth
 Content-Type: application/json
 
+//get auth of Remu
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "65e0d6d5923c6fb9837fe209"
+    "userID" : "66030412fb3f77975f646508"
 }
 
+//get auth of BigMan
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9"
+    "userID" : "660303d8fb3f77975f646504"
 }
 
 //testing a failed request
@@ -149,16 +155,17 @@ Content-Type: application/json
     "authorizationRole" : "User"
 }
 
+//deletes authorization for BigManSquare
 ###
 POST http://localhost:8081/auth/deleteAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d3ae923c6fb9837fe1f9"
+    "userID" : "660303d8fb3f77975f646504"
 }
 
 
-//testing for the shopping cart routes
+//testing for creating a shopping cart
 ###
 POST http://localhost:8081/cart/createCart
 Content-Type: application/json
@@ -168,16 +175,24 @@ Content-Type: application/json
     "userID" : "1"
 }
 
-//testing for getTickets
+//testing for get methods
 ###
-GET http://localhost:8081/cart/getTickets
+GET http://localhost:8081/cart/getOneWay
 Content-Type: application/json
 
 {
     "userID" : "1"
 }
 
-//testing for clearCart, reduceCart, increaseCart and deleteCarts
+###
+GET http://localhost:8081/cart/getWeekendPass
+Content-Type: application/json
+
+{
+    "userID" : "1"
+}
+
+//testing for clearCart, reduce/increase, and deleteCarts
 ###
 POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
@@ -187,29 +202,34 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8081/cart/reduceCart
+POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/increaseCart
+POST http://localhost:8081/cart/reduceWP
 Content-Type: application/json
 
 {
-    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/tempIncrease
+POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "username" : "new",
+    "userID" : "1"
+}
+
+###
+POST http://localhost:8081/cart/increaseWP
+Content-Type: application/json
+
+{
     "userID" : "1"
 }
 
@@ -222,7 +242,7 @@ GET  http://localhost:8081/MBTAuser/getUserID
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
 
 ###
@@ -239,7 +259,7 @@ POST http://localhost:8081/MBTAuser/ticketUsage
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
 
 ###
@@ -247,5 +267,5 @@ DELETE http://localhost:8081/MBTAuser/deleteUsedTickets
 Content-Type: application/json 
 
 {
-    "userID" : "472uti914reo001"
+    "userID" : "65fc6c850fc37441469227e7"
 }
