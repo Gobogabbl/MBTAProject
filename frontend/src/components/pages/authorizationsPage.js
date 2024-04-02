@@ -8,11 +8,11 @@ const AuthorizationPage = () => {
 
     const [user, setUser] = useState({})
     const navigate = useNavigate()
-    const handleClick = (e) => {
-        e.preventDefault();
-        localStorage.removeItem('accessToken')
-        return navigate('/')
-    }
+    // const handleClick = (e) => {
+    //     e.preventDefault();
+    //     localStorage.removeItem('accessToken')
+    //     return navigate('/')
+    // }
 
     useEffect(() => {
         setUser(getUserInfo())
@@ -52,11 +52,30 @@ const AuthorizationPage = () => {
                  style={{ width: "30rem" }}
                 >
 
+                {/* page description */}
                 <Card.Body>
                 <Card.Title>Page Description</Card.Title>
                 <Card.Text>This page is a means in order for the admins to see the different roles
                     of each user, showing and/or assigning user roles between the existing roles:
                     User and Admin.
+                </Card.Text>
+                </Card.Body>
+                </Card>
+
+                <Card
+                 body
+                 outline
+                 color="success"
+                 className="mx-1 my-2"
+                 style={{ width: "30rem" }}
+                >
+
+
+                <Card.Body>
+                <Card.Title>Place Holder: Authorizations</Card.Title>
+                <Card.Text>This will be where the necessary information will be displayed. 
+                    This being when there is a call to get all authorizations, all authorizations of a specific role,
+                    and even getting a specific user to get their authorization.
                 </Card.Text>
                 </Card.Body>
                 </Card>
