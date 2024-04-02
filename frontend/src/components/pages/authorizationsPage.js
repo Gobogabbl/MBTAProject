@@ -1,24 +1,24 @@
-import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom'
-import getUserInfo from '../../utilities/decodeJwt'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import getUserInfo from '../../utilities/decodeJwt';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 const AuthorizationPage = () => {
-
-    const [user, setUser] = useState({})
-    const navigate = useNavigate()
+    const [user, setUser] = useState({});
     const [formData, setFormData] = useState({
         userID: '',
         username: '',
         authorizationRole: ''
     });
+    const [allAuth, setAllAuth] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setUser(getUserInfo())
-    }, [])
+        setUser(getUserInfo());
+    }, []);
 
     useEffect(() => {
         getAllAuth();
@@ -33,6 +33,8 @@ const AuthorizationPage = () => {
         try {
             await axios.post('/assignAuth', formData);
             // Assuming success, you can navigate to another page or perform any other action here
+            // After assigning authorization, refresh the list
+            getAllAuth();
         } catch (error) {
             console.error(error);
             // Handle error
@@ -49,10 +51,15 @@ const AuthorizationPage = () => {
         }
     };
 
+    const handleGetAllAuth = async () => {
+        getAllAuth();
+    };
 
     if (!user) return (
-        <div><h4>Log in to view this page.</h4></div>)
-    const { id, email, username } = user
+        <div><h4>Log in to view this page.</h4></div>
+    );
+    const { id, email, username } = user;
+
     return (
         <>
             <div className="container">
@@ -94,6 +101,10 @@ const AuthorizationPage = () => {
                             </Form>
                         </Card.Body>
                     </Card>
+
+                    <Button variant="primary" onClick={handleGetAllAuth}>
+                        Get All Users and Authorizations
+                    </Button>
                 </div>
 
                 <div className="text-center">
@@ -110,7 +121,7 @@ const AuthorizationPage = () => {
                 </div>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default AuthorizationPage
+export default AuthorizationPage;
