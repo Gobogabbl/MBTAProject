@@ -27,7 +27,11 @@ const AuthorizationPage = () => {
             <div>
                 <h3>
                     Authorizations Page
+                </h3>
+                <h3>
                     Current User Information
+                </h3>
+                <h3>
                     User:
                     <span className='username'> @{username}</span>
                 </h3>
