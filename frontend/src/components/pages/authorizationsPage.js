@@ -70,7 +70,7 @@ const AuthorizationPage = () => {
                  style={{ width: "30rem" }}
                 >
 
-
+                {/* Display the necessary authorization text */}
                 <Card.Body>
                 <Card.Title>Place Holder: Authorizations</Card.Title>
                 <Card.Text>This will be where the necessary information will be displayed. 
