@@ -9,7 +9,7 @@ function DeleteUsedTickets(){
         async function fetchData(){
             try {
                 const response = await axios.get('http://localhost:8081/cart/cartGetOneWay');
-                setUsedTickets(response.data); // assuming response.data is an array
+                setUsedTickets(response.data); 
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
