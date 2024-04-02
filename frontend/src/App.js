@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
+import AuthorizationPage from "./components/pages/authorizationsPage";
 
 
 // We import all the components we need in our app
@@ -38,6 +39,7 @@ const App = () => {
           <Route exact path="/mbtaAlerts" element={<MbtaAlertsPage />} />
           <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
           <Route exact path="/cartTicketSelection" element={<CartTicketSelection />} />
+          <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
         </Routes>
       </UserContext.Provider>
