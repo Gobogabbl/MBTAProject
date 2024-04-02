@@ -69,7 +69,7 @@ Content-Type: application/json
 }
 
 ###
-POST  http://localhost:8080/user/deleteAll
+POST  http://localhost:8081/user/deleteAll
 
 //testing for the authorizationRoutes
 //test for Remu
@@ -78,8 +78,7 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "66030412fb3f77975f646508",
-    "username" : "RemuRimeSlime",
+    "userID" : "65e0d6d5923c6fb9837fe209",
     "authorizationRole" : "Admin"
 }
 
@@ -90,7 +89,6 @@ Content-Type: application/json
 
 {
     "userID" : "65e0d6d5923c6fb9837fe003",
-    "username" : "Kobati",
     "authorizationRole" : "Admin"
 }
 
@@ -100,42 +98,38 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "660303d8fb3f77975f646504",
-    "username" : "BigManSquare",
+    "userID" : "65e0d3ae923c6fb9837fe1f9",
     "authorizationRole" : "User"
 }
 
-//test for robbert
+//test for gobblgabble
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65fc6c850fc37441469227e7",
-    "username" : "Robert Swifflebottom",
-    "authorizationRole" : "User"
+    "userID" : "65e0d3ae923c6fb9837fe1f9",
+    "authorizationRole" : "Admin"
 }
 
 ###
 GET http://localhost:8081/auth/getAllAuth
 Content-Type: application/json
 
-//get auth of Remu
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "66030412fb3f77975f646508"
+    "userID" : "65e0d6d5923c6fb9837fe209"
 }
 
-//get auth of BigMan
 ###
 GET http://localhost:8081/auth/getAuthByID
 Content-Type: application/json
 
 {
-    "userID" : "660303d8fb3f77975f646504"
+    "userID" : "65e0d3ae923c6fb9837fe1f9"
 }
 
 //testing a failed request
@@ -155,17 +149,16 @@ Content-Type: application/json
     "authorizationRole" : "User"
 }
 
-//deletes authorization for BigManSquare
 ###
 POST http://localhost:8081/auth/deleteAuth
 Content-Type: application/json
 
 {
-    "userID" : "660303d8fb3f77975f646504"
+    "userID" : "65e0d3ae923c6fb9837fe1f9"
 }
 
 
-//testing for creating a shopping cart
+//testing for the shopping cart routes
 ###
 POST http://localhost:8081/cart/createCart
 Content-Type: application/json
@@ -175,24 +168,16 @@ Content-Type: application/json
     "userID" : "1"
 }
 
-//testing for get methods
+//testing for getTickets
 ###
-GET http://localhost:8081/cart/getOneWay
+GET http://localhost:8081/cart/getTickets
 Content-Type: application/json
 
 {
     "userID" : "1"
 }
 
-###
-GET http://localhost:8081/cart/getWeekendPass
-Content-Type: application/json
-
-{
-    "userID" : "1"
-}
-
-//testing for clearCart, reduce/increase, and deleteCarts
+//testing for clearCart, reduceCart, increaseCart and deleteCarts
 ###
 POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
@@ -202,34 +187,29 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8081/cart/reduceOW
+POST http://localhost:8081/cart/reduceCart
 Content-Type: application/json
 
 {
+    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/reduceWP
+POST http://localhost:8081/cart/increaseCart
 Content-Type: application/json
 
 {
+    "username" : "new",
     "userID" : "1"
 }
 
 ###
-POST http://localhost:8081/cart/increaseOW
+POST http://localhost:8081/cart/tempIncrease
 Content-Type: application/json
 
 {
-    "userID" : "1"
-}
-
-###
-POST http://localhost:8081/cart/increaseWP
-Content-Type: application/json
-
-{
+    "username" : "new",
     "userID" : "1"
 }
 
@@ -242,7 +222,7 @@ GET  http://localhost:8081/MBTAuser/getUserID
 Content-Type: application/json 
 
 {
-    "userID" : "65fc6c850fc37441469227e7"
+    "userID" : "472uti914reo001"
 }
 
 ###
@@ -259,7 +239,7 @@ POST http://localhost:8081/MBTAuser/ticketUsage
 Content-Type: application/json 
 
 {
-    "userID" : "65fc6c850fc37441469227e7"
+    "userID" : "472uti914reo001"
 }
 
 ###
@@ -267,5 +247,5 @@ DELETE http://localhost:8081/MBTAuser/deleteUsedTickets
 Content-Type: application/json 
 
 {
-    "userID" : "65fc6c850fc37441469227e7"
+    "userID" : "472uti914reo001"
 }
