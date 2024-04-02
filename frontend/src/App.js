@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
 import AuthorizationPage from "./components/pages/authorizationsPage";
-
+import CartTicketSelection from "./components/pages/cartTicketSelection";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
@@ -13,7 +13,6 @@ import HomePage from "./components/pages/homePage";
 import Login from "./components/pages/loginPage";
 import Signup from "./components/pages/registerPage";
 import PrivateUserProfile from "./components/pages/privateUserProfilePage";
-import CartTicketSelection from "./components/pages/cartTicketSelection";
 import { createContext, useState, useEffect } from "react";
 import getUserInfo from "./utilities/decodeJwt";
 
