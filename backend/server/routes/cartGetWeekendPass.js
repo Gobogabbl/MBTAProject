@@ -2,11 +2,10 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require("../models/shoppingCartModel");
 
-router.get('/getWeekendPass', async (req, res) => {
-    const { userId } = req.body;
+router.get('/getWeekendPass/:userId', async (req, res) => {
 
     try {
-        const user = await shoppingCart.findOne({ userId: userId });
+        const user = await shoppingCart.findOne({ userId: req.params.userId });
         if (!user) {
             return res.status(404).send("User with userId does not exist.");
         } else {
