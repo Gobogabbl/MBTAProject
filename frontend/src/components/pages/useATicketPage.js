@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt';
 
-function DeleteUsedTickets() {
-    const [usedTickets, setUsedTickets] = useState([]);
+function GetUsableTickets() {
+    const [usableTickets, setUsableTickets] = useState([]);
     const [user, setUser] = useState({});
 
     useEffect(() => {
@@ -23,8 +23,8 @@ function DeleteUsedTickets() {
     const fetchData = async () => {
         try {
             console.debug(user.id);
-            const response = await axios.get(`http://localhost:8081/cart/getOneWay?userId=${user.id}`);
-            setUsedTickets(response.data);
+            const response = await axios.get(`http://localhost:8081/cart/getOneWay/userId=${user.id}`);
+            setUsableTickets(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -34,16 +34,8 @@ function DeleteUsedTickets() {
 
     return (
         <div>
-            <h3>
-                Your userId in mongo db is
-                <span className='userId'> {user.id}</span>
-            </h3>
-            <h3>
-                Your registered email is
-                <span className='email'> {user.email}</span>
-            </h3>
-            <h1>Currently Owned Tickets</h1>
-            {usedTickets.map(ticket => (
+            <h1>Which ticket would you like to use?</h1>
+            {usableTickets.map(ticket => (
                 <Card key={ticket.id} body outline color="success" className="mx-1 my-2" bg="danger" style={{ width: "30rem" }}>
                     <Card.Body>
                         <Card.Title>{ticket.attributes.header}</Card.Title>
@@ -55,4 +47,4 @@ function DeleteUsedTickets() {
     );
 }
 
-export default DeleteUsedTickets;
+export default GetUsableTickets;

@@ -5,7 +5,7 @@ import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
 import AuthorizationPage from "./components/pages/authorizationsPage";
 import CartTicketSelection from "./components/pages/cartTicketSelection";
-import PostTickets from "./components/pages/deleteUsedTicketsPage";
+import UseTickets from "./components/pages/useATicketPage";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
@@ -41,7 +41,7 @@ const App = () => {
           <Route exact path="/cartTicketSelection" element={<CartTicketSelection />} />
           <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
-          <Route path="/postTickets" element={<PostTickets />} />
+          <Route path="/useTickets" element={<UseTickets />} />
         </Routes>
       </UserContext.Provider>
     </>
