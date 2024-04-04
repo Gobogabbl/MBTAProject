@@ -8,12 +8,6 @@ const shoppingCartSchema = new mongoose.Schema(
       required: true,
       label: "username",
     },
-
-    userID: {
-      type: String,
-      required: true,
-      label: "userID",
-    },
     
     crOneWay: {
         type: Number,

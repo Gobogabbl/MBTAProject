@@ -171,26 +171,16 @@ POST http://localhost:8081/cart/createCart
 Content-Type: application/json
 
 {
-    "username" : "new",
-    "userID" : "1"
+    "username" : "Holy Cow!!!"
 }
 
 //testing for get methods
 ###
-GET http://localhost:8081/cart/getOneWay
+GET http://localhost:8081/cart/getOneWay/660eed13a9b7eb85379a9b49
 Content-Type: application/json
-
-{
-    "userID" : "1"
-}
 
 ###
-GET http://localhost:8081/cart/getWeekendPass
-Content-Type: application/json
-
-{
-    "userID" : "1"
-}
+GET http://localhost:8081/cart/getWeekendPass/660eed13a9b7eb85379a9b49
 
 //testing for clearCart, reduce/increase, and deleteCarts
 ###
@@ -198,7 +188,7 @@ POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "660eed13a9b7eb85379a9b49"
 }
 
 ###
@@ -206,7 +196,7 @@ POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "660eed13a9b7eb85379a9b49"
 }
 
 ###
@@ -214,7 +204,7 @@ POST http://localhost:8081/cart/reduceWP
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "660eed13a9b7eb85379a9b49"
 }
 
 ###
@@ -222,7 +212,7 @@ POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "660eed13a9b7eb85379a9b49"
 }
 
 ###
@@ -230,7 +220,7 @@ POST http://localhost:8081/cart/increaseWP
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "660eed13a9b7eb85379a9b49"
 }
 
 ###
