@@ -1,9 +1,9 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const shoppingCart = require("../models/shoppingCartModel");
 
 router.get('/getOneWay/:userId', async (req, res) => {
-
     try {
         const user = await shoppingCart.findOne({ userID: req.params.userId });
         if (!user) {
@@ -12,6 +12,9 @@ router.get('/getOneWay/:userId', async (req, res) => {
             const crOneWay = user.crOneWay;
             return res.json(crOneWay);
         }
+
+        const crOneWay = user.crOneWay;
+        return res.json(crOneWay);
     } catch (err) {
         console.log(err);
         return res.status(500).send("Internal Server Error");

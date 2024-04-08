@@ -1,21 +1,23 @@
+const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const z = require('zod')
-const newCart = require('../models/shoppingCartModel')
+const newCart = require('../models/shoppingCartModel');
 
 router.post('/createCart', async (req, res) => {
-    const { username, userID } = req.body
+    const { username } = req.body
 
-    //check if cart already exists
-    const user = await newCart.findOne({ username: username, userID: userID })
+    // Check if cart already exists
+    const user = await newCart.findOne({ username: username })
     if (user)
         return res.status(409).send({ message: "User is taken, pick another" })
 
+    // Generate new ObjectId for userID
+    const userID = new mongoose.Types.ObjectId();
 
-    //creates a new user
+    // Create a new user
     const createUser = new newCart({
-        username: username,
         userID: userID,
+        username: username,
         crOneWay: 0,
         crWeekendPass: 0,
     });
@@ -27,7 +29,6 @@ router.post('/createCart', async (req, res) => {
     } catch (error) {
         res.status(400).send({ message: "Error trying to create new user" });
     }
-
 })
 
 module.exports = router;
