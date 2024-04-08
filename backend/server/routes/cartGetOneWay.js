@@ -5,9 +5,9 @@ const shoppingCart = require("../models/shoppingCartModel");
 router.get('/getOneWay/:userId', async (req, res) => {
 
     try {
-        const user = await shoppingCart.findOne({ userId: req.params.userId });
+        const user = await shoppingCart.findOne({ userID: req.params.userId });
         if (!user) {
-            return res.status(404).send("User with userId does not exist.");
+            return res.status(404).send("User with userID does not exist.");
         } else {
             const crOneWay = user.crOneWay;
             return res.json(crOneWay);

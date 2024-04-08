@@ -172,17 +172,14 @@ Content-Type: application/json
 
 {
     "username" : "new",
-    "userID" : "1"
+    "userID" : "660c3114af2e532e9aa95090"
 }
 
 //testing for get methods
 ###
-GET http://localhost:8081/cart/getOneWay
+GET http://localhost:8081/cart/getOneWay/660c3114af2e532e9aa95090
 Content-Type: application/json
 
-{
-    "userID" : "1"
-}
 
 ###
 GET http://localhost:8081/cart/getWeekendPass
