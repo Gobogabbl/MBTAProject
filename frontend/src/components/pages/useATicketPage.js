@@ -80,7 +80,7 @@ function GetUsableTickets() {
         <div class="col-md-12 text-center">
             <h1>Which ticket would you like to use?</h1>
             <Button variant="info" onClick={reduceOW} disabled={oneWayCount === 0}>One Way</Button>
-            <Button variant="danger" onClick={reduceWP} disabled={weekendPassCount === 0}>Weekend Pass</Button>
+            <Button variant="warning" onClick={reduceWP} disabled={weekendPassCount === 0}>Weekend Pass</Button>
             <Card.Text>
                 <p>Number of available One Way tickets: {oneWayCount !== null ? oneWayCount : 'Loading...'}</p>
                 <p>Number of available Weekend Passes: {weekendPassCount !== null ? weekendPassCount : 'Loading...'}</p>
