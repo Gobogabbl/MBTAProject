@@ -14,6 +14,7 @@ const AuthorizationPage = () => {
         authorizationRole: ''
     });
     const [allAuth, setAllAuth] = useState([]);
+    const [assignAuthResponse, setAssignAuthResponse] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,15 +32,22 @@ const AuthorizationPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/assignAuth', formData);
-            // Assuming success, you can navigate to another page or perform any other action here
-            // After assigning authorization, refresh the list
-            getAllAuth();
+            const response = await axios.post('http://localhost:8081/auth/assignAuth', formData);
+            if (response.status === 200 || response.status === 201) {
+                setAssignAuthResponse('Authorization assigned successfully');
+                // Assuming success, you can navigate to another page or perform any other action here
+                // After assigning authorization, refresh the list
+                getAllAuth();
+            } else {
+                setAssignAuthResponse(response.data.message || 'Failed to assign authorization');
+            }
         } catch (error) {
             console.error(error);
             // Handle error
+            setAssignAuthResponse(error.response.data.message || 'Failed to assign authorization');
         }
     };
+    
 
     const getAllAuth = async () => {
         try {
@@ -102,9 +110,16 @@ const AuthorizationPage = () => {
                         </Card.Body>
                     </Card>
 
-                    <Button variant="primary" onClick={handleGetAllAuth}>
-                        Get All Users and Authorizations
-                    </Button>
+                    
+
+                    {assignAuthResponse && (
+                        <Card body outline color="info" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                            <Card.Body>
+                                <Card.Title>Assign Authorization Response</Card.Title>
+                                <Card.Text>{assignAuthResponse}</Card.Text>
+                            </Card.Body>
+                        </Card>
+                    )}
                 </div>
 
                 <div className="text-center">
@@ -118,6 +133,10 @@ const AuthorizationPage = () => {
                             </Card.Body>
                         </Card>
                     ))}
+
+                    <Button variant="primary" onClick={handleGetAllAuth}>
+                        Get All Users and Authorizations
+                    </Button>
                 </div>
             </div>
         </>
