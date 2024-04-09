@@ -12,9 +12,7 @@ router.get('/getOneWay/:userId', async (req, res) => {
             const crOneWay = user.crOneWay;
             return res.json(crOneWay);
         }
-
-        const crOneWay = user.crOneWay;
-        return res.json(crOneWay);
+        
     } catch (err) {
         console.log(err);
         return res.status(500).send("Internal Server Error");

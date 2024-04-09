@@ -5,10 +5,12 @@ import getUserInfo from '../../utilities/decodeJwt';
 import Button from 'react-bootstrap/Button';
 
 function GetUsableTickets() {
-    const [oneWayCount, setUsableTickets] = useState(null); // Initialize to null
+    const [oneWayCount, setUsableTickets] = useState(null);
+    const [weekendPassCount, setUsablePasses] = useState(null);
     const [user, setUser] = useState({});
     const [crOneWayData, setCrOneWayData] = useState(null);
     const [crWeekendPassData, setCrWeekendPassData] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
     const UrlReduceOW = "http://localhost:8081/cart/reduceOW";
     const UrlReduceWP = "http://localhost:8081/cart/reduceWP";
 
@@ -26,10 +28,31 @@ function GetUsableTickets() {
         }
     }, []);
 
+    useEffect(async () => {
+        const userInfo = getUserInfo();
+        try {
+            console.debug(userInfo.id);
+            const response = await axios.get(`http://localhost:8081/cart/getWeekendPass/${userInfo.id}`);
+            setUsablePasses(response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+        if (userInfo && userInfo.id) {
+            setUser(userInfo);
+        }
+    }, []);
+
     const reduceOW = async () => {
         try {
-            const response = await axios.post(UrlReduceOW);
+            const response = await axios.post(UrlReduceOW, { userID: user.id });
             setCrOneWayData(response.data);
+            setSuccessMessage("You have successfully used a One Way ticket. Have a safe ride!");
+            
+            const updatedResponse = await axios.get(`http://localhost:8081/cart/getOneWay/${user.id}`);
+            setUsableTickets(updatedResponse.data);
+            setTimeout(() => {
+                setSuccessMessage(null);
+            }, 3000);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -39,6 +62,13 @@ function GetUsableTickets() {
         try {
             const response = await axios.post(UrlReduceWP);
             setCrWeekendPassData(response.data);
+            setSuccessMessage("You have successfully used a Weekend Pass. Have a safe ride!");
+
+            const updatedResponse = await axios.get(`http://localhost:8081/cart/getWeekendPass/${user.id}`);
+            setUsablePasses(updatedResponse.data);
+            setTimeout(() => {
+                setSuccessMessage(null);
+            }, 3000);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -49,12 +79,12 @@ function GetUsableTickets() {
     return (
         <div class="col-md-12 text-center">
             <h1>Which ticket would you like to use?</h1>
-            <Button variant="primary" onClick={reduceOW}>One Way</Button>
-            <Button variant="primary" onClick={reduceWP}>Weekend Pass</Button>
+            <Button variant="info" onClick={reduceOW} disabled={oneWayCount === 0}>One Way</Button>
+            <Button variant="danger" onClick={reduceWP} disabled={weekendPassCount === 0}>Weekend Pass</Button>
             <Card.Text>
-                <p>Number of available One Way tickets: {oneWayCount !== null ? oneWayCount : 'Loading...'}</p> {/* Display oneWayCount */}
-                      // Display text on successful button press for both buttons here
-                      // Have buttons unclickable if used does not have needed ticket
+                <p>Number of available One Way tickets: {oneWayCount !== null ? oneWayCount : 'Loading...'}</p>
+                <p>Number of available Weekend Passes: {weekendPassCount !== null ? weekendPassCount : 'Loading...'}</p>
+                {successMessage && <p>{successMessage}</p>}
             </Card.Text>
         </div>
     );
