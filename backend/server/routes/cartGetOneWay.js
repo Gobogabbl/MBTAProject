@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require("../models/shoppingCartModel");
 
-router.get('/getCart/:userId', async (req, res) => {
+router.get('/getOneWay/:userId', async (req, res) => {
     try {
         const userId = req.params.userId; // Get userId from request parameters
         const isValidObjectId = mongoose.Types.ObjectId.isValid(userId); // Check if userId is a valid ObjectId
