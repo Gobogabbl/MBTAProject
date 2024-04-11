@@ -207,9 +207,12 @@ Content-Type: application/json
 
 //testing for get methods
 ###
-GET http://localhost:8081/cart/getOneWay/660c3114af2e532e9aa95090
+GET http://localhost:8081/cart/getOneWay
 Content-Type: application/json
 
+###
+GET http://localhost:8081/cart/getOneWay/660c3114af2e532e9aa95090
+Content-Type: application/json
 
 ###
 GET http://localhost:8081/cart/getWeekendPass
@@ -218,6 +221,11 @@ Content-Type: application/json
 {
     "userID" : "1"
 }
+
+###
+GET http://localhost:8081/cart/getWeekendPass/660c3114af2e532e9aa95090
+Content-Type: application/json
+
 
 //testing for clearCart, reduce/increase, and deleteCarts
 ###
@@ -234,6 +242,14 @@ Content-Type: application/json
 
 {
     "userID" : "1"
+}
+
+###
+POST http://localhost:8081/cart/reduceOW
+Content-Type: application/json
+
+{
+    "userID" : "660c3114af2e532e9aa95090"
 }
 
 ###
