@@ -14,7 +14,8 @@ const AllAuthorizations = () => {
         authorizationRole: ''
     });
     const [authInfo, setAuthInfo] = useState(null);
-    const navigate = useNavigate();
+    const [allAuth, setAllAuth] = useState([]);
+    
 
     useEffect(() => {
         setUser(getUserInfo());
@@ -27,11 +28,15 @@ const AllAuthorizations = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(`/getAuthById?userID=${formData.userID}`);
-            setAuthInfo(response.data.auth);
+            const response = await axios.get(`http://localhost:8081/auth/getAuthByID?userID=${formData.userID}`);
+            if (response.status === 200 || response.status === 201) {
+                setAuthInfo(response.data.auth);
+            } else {
+                setAuthInfo(response.data);
+            }
         } catch (error) {
             console.error(error);
-            // Handle error
+            setAuthInfo(error.response.data);
         }
     };
 
@@ -78,12 +83,38 @@ const AllAuthorizations = () => {
                         <Card body outline color="info" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
                             <Card.Body>
                                 <Card.Title>Authorization Information</Card.Title>
-                                <Card.Text>User ID: {authInfo.userID}</Card.Text>
-                                <Card.Text>Username: {authInfo.username}</Card.Text>
-                                <Card.Text>Authorization Role: {authInfo.authorizationRole}</Card.Text>
+                                {authInfo.error ? (
+                                    <Card.Text>Error: {authInfo.error}</Card.Text>
+                                ) : (
+                                    <>
+                                        <Card.Text>User ID: {authInfo.userID}</Card.Text>
+                                        <Card.Text>Username: {authInfo.username}</Card.Text>
+                                        <Card.Text>Authorization Role: {authInfo.authorizationRole}</Card.Text>
+                                    </>
+                                )}
                             </Card.Body>
                         </Card>
                     )}
+                    {/* All Users and Authorizations section */}
+                    <div>
+                        <h3>All Users and Authorizations</h3>
+                        {allAuth.map(auth => (
+                        <Card
+                            key={auth._id}
+                            body
+                            outline
+                            color="info"
+                            className="mx-1 my-2"
+                            style={{ width: "30rem" }}
+                        >
+                        <Card.Body>
+                            <Card.Title>User ID: {auth.userID}</Card.Title>
+                            <Card.Text>Username: {auth.username}</Card.Text>
+                            <Card.Text>Authorization Role: {auth.authorizationRole}</Card.Text>
+                        </Card.Body>
+                            </Card>
+          ))}
+        </div>
                 </div>
             </div>
         </>
