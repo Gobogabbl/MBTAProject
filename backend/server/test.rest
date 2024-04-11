@@ -171,29 +171,21 @@ POST http://localhost:8081/cart/createCart
 Content-Type: application/json
 
 {
-    "username" : "new",
-    "userID" : "660c3114af2e532e9aa95090"
+    "username" : "new"
 }
 
 //testing for get methods
+
 ###
-GET http://localhost:8081/cart/getOneWay
+GET http://localhost:8081/cart/getCart/seanpotter045@gmail.com
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getOneWay/660c3114af2e532e9aa95090
+GET http://localhost:8081/cart/getOneWay/66174a7d204238cacfa18140
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getWeekendPass
-Content-Type: application/json
-
-{
-    "userID" : "1"
-}
-
-###
-GET http://localhost:8081/cart/getWeekendPass/660c3114af2e532e9aa95090
+GET http://localhost:8081/cart/getWeekendPass/66174a7d204238cacfa18140
 Content-Type: application/json
 
 
@@ -235,7 +227,7 @@ POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "66174a7d204238cacfa18140"
 }
 
 ###
@@ -243,7 +235,7 @@ POST http://localhost:8081/cart/increaseWP
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "userID" : "66174a7d204238cacfa18140"
 }
 
 ###

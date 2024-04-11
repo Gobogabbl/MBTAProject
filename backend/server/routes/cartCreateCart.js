@@ -11,12 +11,8 @@ router.post('/createCart', async (req, res) => {
     if (user)
         return res.status(409).send({ message: "User is taken, pick another" })
 
-    // Generate new ObjectId for userID
-    const userID = new mongoose.Types.ObjectId();
-
     // Create a new user
     const createUser = new newCart({
-        userID: userID,
         username: username,
         crOneWay: 0,
         crWeekendPass: 0,

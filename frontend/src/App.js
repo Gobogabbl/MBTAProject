@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
 import AuthorizationPage from "./components/pages/authorizationsPage";
-import CartTicketSelection from "./components/pages/cartTicketSelection";
+import TicketCalculator from "./components/pages/ticketCalculator";
 import UseTickets from "./components/pages/useATicketPage";
 
 // We import all the components we need in our app
@@ -38,7 +38,7 @@ const App = () => {
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/mbtaAlerts" element={<MbtaAlertsPage />} />
           <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
-          <Route exact path="/cartTicketSelection" element={<CartTicketSelection />} />
+          <Route exact path="/ticketCalculator" element={<TicketCalculator />} />
           <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route path="/useTickets" element={<UseTickets />} />
