@@ -15,6 +15,12 @@ router.post('/assignAuth', async (req, res) => {
       return res.status(400).json({ error: "userID, username, and authorizationRole are required." });
     }
 
+    //Chek if the userID exists
+    const existingUserID = await newUserModel.findOne({ userID: userID });
+    if (!existingUserID) {
+      return res.status(404).json({ error: "User not found with the provided userID." });
+    }
+
     // Check if the user exists
     const existingUser = await newUserModel.findOne({ username: username });
     if (!existingUser) {
@@ -22,7 +28,7 @@ router.post('/assignAuth', async (req, res) => {
     }
 
     // Check if the user already has the authorizationRole
-    const existingAuth = await authorizationModel.findOne({ userID: userID });
+    const existingAuth = await authorizationModel.findOne({ userID: userID, username: username });
     if (existingAuth) {
       return res.status(409).send({ message: "Authorization already exists for the given userID." });
     }

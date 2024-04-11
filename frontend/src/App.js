@@ -6,6 +6,7 @@ import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
 import AuthorizationPage from "./components/pages/authorizationsPage";
 import TicketCalculator from "./components/pages/ticketCalculator";
 import UseTickets from "./components/pages/useATicketPage";
+import AllAuthorizations from "./components/pages/allAuthorizationsPage";
 
 // We import all the components we need in our app
 import Navbar from "./components/navbar";
@@ -40,6 +41,7 @@ const App = () => {
           <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
           <Route exact path="/ticketCalculator" element={<TicketCalculator />} />
           <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
+          <Route exact path="/allAuthorizationsPage" element={<AllAuthorizations />}/>
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route path="/useTickets" element={<UseTickets />} />
         </Routes>
