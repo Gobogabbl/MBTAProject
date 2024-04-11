@@ -30,6 +30,7 @@ export default function Navbar() {
         <Nav.Link href="/mbtaAPIFunction">MBTA API</Nav.Link>
         <Nav.Link href="/cartTicketSelection">Ticket Selection </Nav.Link>
         <Nav.Link href="/authorizationsPage">Authorizations</Nav.Link>
+        <Nav.Link href="/allAuthorizationsPage">All Authorizations</Nav.Link>
         <Nav.Link href="/useTickets">Use a Ticket</Nav.Link>
       </Nav>
     </Container>

@@ -83,7 +83,7 @@ Content-Type: application/json
     "authorizationRole" : "Admin"
 }
 
-//testing fail case
+//testing fail case (wrong ID, right username)
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
@@ -92,6 +92,17 @@ Content-Type: application/json
     "userID" : "65e0d6d5923c6fb9837fe003",
     "username" : "Kobati",
     "authorizationRole" : "Admin"
+}
+
+//testing failcase (wrong ID, right username)
+###
+POST http://localhost:8081/auth/assignAuth
+Content-Type: application/json
+
+{
+    "userID" : "661313d8fb3f77963f646562",
+    "username" : "BigManSquare",
+    "authorizationRole" : "User"
 }
 
 //test for BigMan
@@ -162,6 +173,25 @@ Content-Type: application/json
 
 {
     "userID" : "660303d8fb3f77975f646504"
+}
+
+//deletes authorization for the fail cases (if they somehow get through)
+//Kobati
+###
+POST http://localhost:8081/auth/deleteAuth
+Content-Type: application/json
+
+{
+    "userID" : "65e0d6d5923c6fb9837fe003"
+}
+
+//BigManSquare
+###
+POST http://localhost:8081/auth/deleteAuth
+Content-Type: application/json
+
+{
+    "userID" : "661313d8fb3f77963f646562"
 }
 
 
