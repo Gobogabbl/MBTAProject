@@ -18,8 +18,21 @@ const AllAuthorizations = () => {
     
 
     useEffect(() => {
-        setUser(getUserInfo());
-    }, []);
+        async function fetchData() {
+          setUser(getUserInfo());
+          
+          try {
+            const authResponse = await axios.get('http://localhost:8081/auth/getAuthByID');
+            setAuthInfo(authResponse.data.auth);
+            
+            const allAuthResponse = await axios.get('http://localhost:8081/auth/getAllAuth');
+            setAllAuth(allAuthResponse.data);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        fetchData();
+      }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
