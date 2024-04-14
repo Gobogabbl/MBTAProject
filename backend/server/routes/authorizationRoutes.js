@@ -50,7 +50,7 @@ router.post('/assignAuth', async (req, res) => {
 
 //ROUTE
 //gets a user's authorization
-router.get("/getAuthById", async (req, res) => {
+router.post("/getAuthById", async (req, res) => {
   try {
     const { userID } = req.body;
 

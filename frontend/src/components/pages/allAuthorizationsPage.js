@@ -20,11 +20,16 @@ const AllAuthorizations = () => {
     useEffect(() => {
         async function fetchData() {
           setUser(getUserInfo());
+          const userInfo = getUserInfo();
           
           try {
-            const authResponse = await axios.get('http://localhost:8081/auth/getAuthByID');
+            const authResponse = await axios.post('http://localhost:8081/auth/getAuthByID', { userID: userInfo.id });
             setAuthInfo(authResponse.data.auth);
-            
+          } catch (error) {
+            console.error(error);
+          }
+
+          try {
             const allAuthResponse = await axios.get('http://localhost:8081/auth/getAllAuth');
             setAllAuth(allAuthResponse.data);
           } catch (error) {
