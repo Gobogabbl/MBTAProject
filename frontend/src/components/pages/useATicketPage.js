@@ -11,14 +11,14 @@ function GetUsableTickets() {
     const [crOneWayData, setCrOneWayData] = useState(null);
     const [crWeekendPassData, setCrWeekendPassData] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
-    const UrlReduceOW = "http://localhost:8081/cart/reduceOW";
-    const UrlReduceWP = "http://localhost:8081/cart/reduceWP";
+    const UrlReduceOW = `${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/reduceOW`;
+    const UrlReduceWP = `${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/reduceWP`;
 
     useEffect(async () => {
         const userInfo = getUserInfo();
         try {
             console.debug(userInfo.id);
-            const response = await axios.get(`http://localhost:8081/cart/getOneWay/${userInfo.id}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/getOneWay/${userInfo.id}`);
             setUsableTickets(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -32,7 +32,7 @@ function GetUsableTickets() {
         const userInfo = getUserInfo();
         try {
             console.debug(userInfo.id);
-            const response = await axios.get(`http://localhost:8081/cart/getWeekendPass/${userInfo.id}`);
+            const response = await axios.get(`${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/getWeekendPass/${userInfo.id}`);
             setUsablePasses(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -48,7 +48,7 @@ function GetUsableTickets() {
             setCrOneWayData(response.data);
             setSuccessMessage("You have successfully used a One Way ticket. Have a safe ride!");
             
-            const updatedResponse = await axios.get(`http://localhost:8081/cart/getOneWay/${user.id}`);
+            const updatedResponse = await axios.get(`${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/getOneWay/${user.id}`);
             setUsableTickets(updatedResponse.data);
             setTimeout(() => {
                 setSuccessMessage(null);
@@ -64,7 +64,7 @@ function GetUsableTickets() {
             setCrWeekendPassData(response.data);
             setSuccessMessage("You have successfully used a Weekend Pass. Have a safe ride!");
 
-            const updatedResponse = await axios.get(`http://localhost:8081/cart/getWeekendPass/${user.id}`);
+            const updatedResponse = await axios.get(`${process.env.REACT_APP_BACKEND_SERVER_URI}/cart/getWeekendPass/${user.id}`);
             setUsablePasses(updatedResponse.data);
             setTimeout(() => {
                 setSuccessMessage(null);
