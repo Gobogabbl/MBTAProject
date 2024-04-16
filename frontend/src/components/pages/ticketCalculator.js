@@ -14,7 +14,6 @@ const TicketCalculator = () => { // Renamed component to StorePage
     }, []);
 
     useEffect(() => {
-        axios.post('http://localhost:8081/cart/deleteCarts');
         const createCart = async () => {
             try {
                 const response = await axios.post('http://localhost:8081/cart/createCart', { username: user.username });
