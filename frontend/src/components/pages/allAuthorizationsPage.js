@@ -22,12 +22,12 @@ const AllAuthorizations = () => {
           setUser(getUserInfo());
           const userInfo = getUserInfo();
           
-          try {
-            const authResponse = await axios.post('http://localhost:8081/auth/getAuthByID', { userID: userInfo.id });
-            setAuthInfo(authResponse.data.auth);
-          } catch (error) {
-            console.error(error);
-          }
+        //   try {
+        //     const authResponse = await axios.post('http://localhost:8081/auth/getAuthByID', { userID: userInfo.id });
+        //     setAuthInfo(authResponse.data.auth);
+        //   } catch (error) {
+        //     console.error(error);
+        //   }
 
           try {
             const allAuthResponse = await axios.get('http://localhost:8081/auth/getAllAuth');
@@ -46,7 +46,7 @@ const AllAuthorizations = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(`http://localhost:8081/auth/getAuthByID?userID=${formData.userID}`);
+            const response = await axios.post('http://localhost:8081/auth/getAuthByID?userID', { userID: formData.userID});
             if (response.status === 200 || response.status === 201) {
                 setAuthInfo(response.data.auth);
             } else {
@@ -126,7 +126,8 @@ const AllAuthorizations = () => {
                             style={{ width: "30rem" }}
                         >
                         <Card.Body>
-                            <Card.Title>User ID: {auth.userID}</Card.Title>
+                            <Card.Title>Authorization</Card.Title>
+                            <Card.Text>User ID: {auth.userID}</Card.Text>
                             <Card.Text>Username: {auth.username}</Card.Text>
                             <Card.Text>Authorization Role: {auth.authorizationRole}</Card.Text>
                         </Card.Body>
