@@ -46,7 +46,7 @@ const AllAuthorizations = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/auth/getAuthByID?userID', { userID: formData.userInfo.id});
+            const response = await axios.post('http://localhost:8081/auth/getAuthByID?userID', { userID: formData.userID});
             if (response.status === 200 || response.status === 201) {
                 setAuthInfo(response.data.auth);
             } else {
