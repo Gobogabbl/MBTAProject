@@ -201,7 +201,7 @@ POST http://localhost:8081/cart/createCart
 Content-Type: application/json
 
 {
-    "username" : "new"
+    "username" : "seanpotter045@gmail.com"
 }
 
 //testing for get methods
