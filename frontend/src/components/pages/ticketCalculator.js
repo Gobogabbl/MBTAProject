@@ -14,13 +14,17 @@ const TicketCalculator = () => { // Renamed component to StorePage
     }, []);
 
     useEffect(() => {
-        //axios.post('http://localhost:8081/cart/deleteCarts');
         const createCart = async () => {
-            try {
-                const response = await axios.post('http://localhost:8081/cart/createCart', { username: user.username });
-                setCart(response.data);
-            } catch (error) {
-                console.error('Error creating cart:', error);
+            const temp = await axios.get(`http://localhost:8081/cart/getCart/${user.username}`);
+            if(!temp)
+                try {
+                    const response = await axios.post('http://localhost:8081/cart/createCart', { username: user.username });
+                    setCart(response.data);
+                } catch (error) {
+                    console.error('Error creating cart:', error);
+                }
+            else {
+                setCart(temp.data)
             }
         };
         
