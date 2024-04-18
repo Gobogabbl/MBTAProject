@@ -9,7 +9,6 @@ import axios from 'axios';
 const AuthorizationPage = () => {
     const [user, setUser] = useState({});
     const [formData, setFormData] = useState({
-        userID: '',
         username: '',
         authorizationRole: ''
     });
@@ -42,6 +41,9 @@ const AuthorizationPage = () => {
             else if (response.status === 404) {
                 setAssignAuthResponse(response.data.error || 'User not found');
             }
+            else if (response.status === 401) {
+                setAssignAuthResponse(response.data.error || 'Invalid authorization role');
+            }
             else {
                 setAssignAuthResponse(response.data.message || 'Failed to assign authorization');
             }
@@ -61,10 +63,6 @@ const AuthorizationPage = () => {
             console.error(error);
             // Handle error
         }
-    };
-
-    const handleGetAllAuth = async () => {
-        getAllAuth();
     };
 
     if (!user) return (
@@ -95,10 +93,6 @@ const AuthorizationPage = () => {
                         <Card.Body>
                             <Card.Title>Assign Authorization</Card.Title>
                             <Form onSubmit={handleSubmit}>
-                                <Form.Group controlId="userID">
-                                    <Form.Label>User ID</Form.Label>
-                                    <Form.Control type="text" name="userID" value={formData.userID} onChange={handleChange} required />
-                                </Form.Group>
                                 <Form.Group controlId="username">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />

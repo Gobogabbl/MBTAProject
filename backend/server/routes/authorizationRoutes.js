@@ -8,17 +8,11 @@ const newUserModel = require('../models/userModel')
 //Assigns the authorization of a user
 router.post('/assignAuth', async (req, res) => {
   try {
-    const { userID, username, authorizationRole } = req.body;
+    const { username, authorizationRole } = req.body;
 
     // Check if userID, username, and authorizationRole are provided
-    if (!userID || !username || !authorizationRole) {
-      return res.status(400).json({ error: "userID, username, and authorizationRole are required." });
-    }
-
-    //Chek if the userID exists
-    const existingUserID = await newUserModel.findOne({ userID: userID });
-    if (!existingUserID) {
-      return res.status(404).json({ error: "User not found with the provided userID." });
+    if (!username || !authorizationRole) {
+      return res.status(400).json({ error: "username, and authorizationRole are required." });
     }
 
     // Check if the user exists
@@ -28,14 +22,19 @@ router.post('/assignAuth', async (req, res) => {
     }
 
     // Check if the user already has the authorizationRole
-    const existingAuth = await authorizationModel.findOne({ userID: userID, username: username });
+    const existingAuth = await authorizationModel.findOne({ username: username });
     if (existingAuth) {
-      return res.status(409).send({ message: "Authorization already exists for the given userID." });
+      return res.status(409).send({ message: "An Authorization already exists for the given userID." });
+    }
+
+    //Check if the authorization used is actually an authorization
+    if(authorizationRole !== "User" && authorizationRole !== "Admin")
+    {
+      return res.status(401).send({error: "This Authorization doesn't exist: User or Admin are the only Authorizations."})
     }
 
     // Create and save the authorization for the user
     const createAuth = new authorizationModel({
-      userID: userID,
       username: username,
       authorizationRole: authorizationRole
     });
