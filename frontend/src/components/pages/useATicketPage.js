@@ -41,7 +41,7 @@ function GetUsableTickets() {
 
     const reduceOW = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/cart/reduceOW', cart.userId);
+            const response = await axios.post('http://localhost:8081/cart/reduceOW', cart.username);
             setSuccessMessage("You have successfully used a One Way ticket. Have a safe ride!");
             setCart(response.data);
         } catch (error) {
@@ -52,7 +52,7 @@ function GetUsableTickets() {
 
     const reduceWP = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/cart/reduceWP', cart.userId);
+            const response = await axios.post('http://localhost:8081/cart/reduceWP', cart.username);
             setSuccessMessage("You have successfully used a Weekend Pass. Have a safe ride!");
             setCart(response.data);
         } catch (error) {
@@ -61,7 +61,7 @@ function GetUsableTickets() {
     };
 
 
-    if (!user.id) return (<div><h4>Log in to view this page.</h4></div>);
+    if (!user) return (<div><h4>Log in to view this page.</h4></div>);
 
 
     return (
