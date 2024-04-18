@@ -36,7 +36,7 @@ const StorePage = () => {
 
     const increaseTickets = async (type) => {
         try {
-            const response = await axios.post(`http://localhost:8081/cart/increase${type}`, { userId: cart.userId });
+            const response = await axios.post(`http://localhost:8081/cart/increase${type}`, { username: cart.username });
             setCart(response.data);
         } catch (error) {
             console.error(`Error increasing ${type} tickets:`, error);
@@ -45,7 +45,7 @@ const StorePage = () => {
 
     const decreaseTickets = async (type) => {
         try {
-            const response = await axios.post(`http://localhost:8081/cart/reduce${type}`, { userId: cart.userId });
+            const response = await axios.post(`http://localhost:8081/cart/reduce${type}`, { username: cart.username });
             setCart(response.data);
         } catch (error) {
             console.error(`Error decreasing ${type} tickets:`, error);
@@ -61,6 +61,10 @@ const StorePage = () => {
         }
     };
 
+    if (!user) return (
+        <div><h4>Log in to view this page.</h4></div>
+    );
+    
     return (
         <Card style={{ width: '30rem' }} className="mx-2 my-2">
             <Card.Body>
