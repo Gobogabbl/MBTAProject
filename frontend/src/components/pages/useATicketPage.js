@@ -4,14 +4,19 @@ import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt';
 import Button from 'react-bootstrap/Button';
 
+
+
+
 function GetUsableTickets() {
     const [user, setUser] = useState({});
     const [cart, setCart] = useState({});
     const [successMessage, setSuccessMessage] = useState(null);
 
+
     useEffect(() => {
         setUser(getUserInfo());
     }, []);
+
 
     useEffect(() => {
         const createCart = async () => {
@@ -33,6 +38,7 @@ function GetUsableTickets() {
         }
     }, [user]);
 
+
     const reduceOW = async () => {
         try {
             const response = await axios.post('http://localhost:8081/cart/reduceOW', cart.userId);
@@ -42,6 +48,7 @@ function GetUsableTickets() {
             console.error('Error fetching data:', error);
         }
     };
+
 
     const reduceWP = async () => {
         try {
@@ -53,7 +60,9 @@ function GetUsableTickets() {
         }
     };
 
+
     if (!user.id) return (<div><h4>Log in to view this page.</h4></div>);
+
 
     return (
         <div class="col-md-12 text-center">
@@ -69,4 +78,8 @@ function GetUsableTickets() {
     );
 }
 
+
 export default GetUsableTickets;
+
+
+
