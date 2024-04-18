@@ -38,11 +38,8 @@ const AuthorizationPage = () => {
                 // After assigning authorization, refresh the list
                 getAllAuth();
             } 
-            else if (response.status === 404) {
-                setAssignAuthResponse(response.data.error || 'User not found');
-            }
             else if (response.status === 401) {
-                setAssignAuthResponse(response.data.error || 'Invalid authorization role');
+                setAssignAuthResponse(response.data.error || 'Unauthorized: ' + response.data.message);
             }
             else {
                 setAssignAuthResponse(response.data.message || 'Failed to assign authorization');
@@ -84,7 +81,8 @@ const AuthorizationPage = () => {
                         {/* page description */}
                         <Card.Body>
                             <Card.Title>Page Description</Card.Title>
-                            <Card.Text>This page is a means in order for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles: User and Admin.</Card.Text>
+                            <Card.Text>This page is a means in order for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles: User and Admin.
+                            This is case sensitive, use proper upper case and lower case when inputting both username and authorization.</Card.Text>
                         </Card.Body>
                     </Card>
 
