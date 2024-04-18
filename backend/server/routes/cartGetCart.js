@@ -8,14 +8,12 @@ router.get('/getCart/:username', async (req, res) => {
         const username = req.params.username;
         const user = await shoppingCart.findOne({ username: username });
         if (!user) {
-            return res.status(404).send("User with this username does not exist.");
-        } else {
-            return res.json(user);
+            return res.status(404).json({ error: "User with this username does not exist." });
         }
-        
+        return res.json(user);
     } catch (err) {
-        console.error(err);
-        return res.status(500).send("Internal Server Error");
+        console.error("Error retrieving user cart:", err);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

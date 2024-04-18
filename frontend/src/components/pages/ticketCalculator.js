@@ -4,104 +4,88 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
-const TicketCalculator = () => { // Renamed component to StorePage
+const StorePage = () => {
     const [user, setUser] = useState({});
     const [cart, setCart] = useState(null);
-    const [totalCost, setTotalCost] = useState(0); // State to store total cost
-    
-    useEffect(() => {
-        setUser(getUserInfo());
-    }, []);
+    const [totalCost, setTotalCost] = useState(0);
 
     useEffect(() => {
-        const createCart = async () => {
-            const temp = await axios.get(`http://localhost:8081/cart/getCart/${user.username}`);
-            if(!temp)
-                try {
-                    const response = await axios.post('http://localhost:8081/cart/createCart', { username: user.username });
+        const user = getUserInfo();
+        setUser(user);
+    
+        const fetchCart = async (username) => {
+            try {
+                const response = await axios.get(`http://localhost:8081/cart/getCart/${username}`);
+                if (response.data && Object.keys(response.data).length > 0) {
+                    // Cart exists, set it
                     setCart(response.data);
-                } catch (error) {
-                    console.error('Error creating cart:', error);
+                } else {
+                    // Cart doesn't exist, create one
+                    const createResponse = await axios.post('http://localhost:8081/cart/createCart', { username: username });
+                    setCart(createResponse.data);
                 }
-            else {
-                setCart(temp.data)
+            } catch (error) {
+                console.error('Error fetching or creating cart:', error);
             }
         };
-        
-        if (user.username) {
-            createCart();
-        }
-    }, [user]);
-
-    const increaseOW = async () => {
-        try {
-            const response = await axios.post('http://localhost:8081/cart/increaseOW', cart.userId);
-            setCart(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    const increaseWP = async () => {
-        try {
-            const response = await axios.post('http://localhost:8081/cart/increaseWP', cart.userId);
-            setCart(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    const reduceOW = async () => {
-        try {
-            const response = await axios.post('http://localhost:8081/cart/reduceOW', cart.userId);
-            setCart(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-    const reduceWP = async () => {
-        try {
-            const response = await axios.post('http://localhost:8081/cart/reduceWP', cart.userId);
-            setCart(response.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
     
-    const calculate = () => {
-        if (cart) {
-            var oTicketsCost = cart.crOneWay * 2.40;
-            var wTicketsCost = cart.crWeekendPass * 10.00;
-            var total = oTicketsCost + wTicketsCost;
-            setTotalCost(total); // Update the total cost state
+        if (user && user.username) {
+            fetchCart(user.username);
         }
-    }
+    }, []);    
+
+    const increaseTickets = async (type) => {
+        try {
+            const response = await axios.post(`http://localhost:8081/cart/increase${type}`, { userId: cart.userId });
+            setCart(response.data);
+        } catch (error) {
+            console.error(`Error increasing ${type} tickets:`, error);
+        }
+    };
+
+    const decreaseTickets = async (type) => {
+        try {
+            const response = await axios.post(`http://localhost:8081/cart/reduce${type}`, { userId: cart.userId });
+            setCart(response.data);
+        } catch (error) {
+            console.error(`Error decreasing ${type} tickets:`, error);
+        }
+    };
+
+    const calculateTotal = () => {
+        if (cart) {
+            const oTicketsCost = cart.crOneWay * 2.40;
+            const wTicketsCost = cart.crWeekendPass * 10.00;
+            const total = oTicketsCost + wTicketsCost;
+            setTotalCost(total);
+        }
+    };
 
     return (
         <Card style={{ width: '30rem' }} className="mx-2 my-2">
             <Card.Body>
-                <Card.Title>Ticket Calculator</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Select if you would like to increase or decrease a specific type of ticket.
-                You can then calculate the total cost of the tickets.</Card.Subtitle>
+                <Card.Title>Store Page</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Select if you would like to increase or decrease a specific type of ticket. You can then calculate the total cost of the tickets.</Card.Subtitle>
                 <div>
-                    {cart && (
+                    {cart ? (
                         <div>
                             <p>Username: {user.username}</p>
                             <p>One Way Tickets ($2.40): {cart.crOneWay}</p>
                             <p>Weekend Pass Tickets ($10.00): {cart.crWeekendPass}</p>
-                            <p>Total Cost: ${totalCost}</p> {/* Display total cost from state */}
+                            <p>Total Cost: ${totalCost}</p>
                         </div>
+                    ) : (
+                        <p>Loading cart...</p>
                     )}
                 </div>
-                <Button variant="primary" onClick={increaseOW}>Increase One Way Tickets</Button>
-                <Button variant="primary" onClick={increaseWP}>Increase Weekend Pass Tickets</Button> {/* Corrected label */}
-                <Button variant="primary" onClick={reduceOW}>Decrease One Way Tickets</Button> {/* Corrected label */}
-                <Button variant="primary" onClick={reduceWP}>Decrease Weekend Pass Tickets</Button> {/* Corrected label */}
-                <Button variant="primary" onClick={calculate}>Calculate Total</Button>
+                <Button variant="primary" onClick={() => increaseTickets('OW')}>Increase One Way Tickets</Button>
+                <Button variant="primary" onClick={() => increaseTickets('WP')}>Increase Weekend Pass Tickets</Button>
+                <Button variant="primary" onClick={() => decreaseTickets('OW')}>Decrease One Way Tickets</Button>
+                <Button variant="primary" onClick={() => decreaseTickets('WP')}>Decrease Weekend Pass Tickets</Button>
+                <Button variant="primary" onClick={calculateTotal}>Calculate Total</Button>
             </Card.Body>
         </Card>
     );
 };
 
-export default TicketCalculator;
+export default StorePage;
