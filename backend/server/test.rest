@@ -68,9 +68,6 @@ Content-Type: application/json
     "userId" : "634edb2a16710b2cda6fb370"
 }
 
-###
-POST  http://localhost:8080/user/deleteAll
-
 //testing for the authorizationRoutes
 //test for Remu
 ###
@@ -78,31 +75,28 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "66030412fb3f77975f646508",
     "username" : "RemuRimeSlime",
     "authorizationRole" : "Admin"
 }
 
-//testing fail case (wrong ID, right username)
+//testing fail case (wrong username)
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65e0d6d5923c6fb9837fe003",
     "username" : "Kobati",
     "authorizationRole" : "Admin"
 }
 
-//testing failcase (wrong ID, right username)
+//testing fail case (non-existent role)
 ###
 POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "661313d8fb3f77963f646562",
     "username" : "BigManSquare",
-    "authorizationRole" : "User"
+    "authorizationRole" : "Shoogle"
 }
 
 //test for BigMan
@@ -111,7 +105,6 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "660303d8fb3f77975f646504",
     "username" : "BigManSquare",
     "authorizationRole" : "User"
 }
@@ -122,7 +115,6 @@ POST http://localhost:8081/auth/assignAuth
 Content-Type: application/json
 
 {
-    "userID" : "65fc6c850fc37441469227e7",
     "username" : "Robert Swifflebottom",
     "authorizationRole" : "User"
 }
@@ -184,16 +176,6 @@ Content-Type: application/json
 {
     "userID" : "65e0d6d5923c6fb9837fe003"
 }
-
-//BigManSquare
-###
-POST http://localhost:8081/auth/deleteAuth
-Content-Type: application/json
-
-{
-    "userID" : "661313d8fb3f77963f646562"
-}
-
 
 //testing for creating a shopping cart
 ###

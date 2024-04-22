@@ -9,7 +9,6 @@ import axios from 'axios';
 const AuthorizationPage = () => {
     const [user, setUser] = useState({});
     const [formData, setFormData] = useState({
-        userID: '',
         username: '',
         authorizationRole: ''
     });
@@ -39,8 +38,8 @@ const AuthorizationPage = () => {
                 // After assigning authorization, refresh the list
                 getAllAuth();
             } 
-            else if (response.status === 404) {
-                setAssignAuthResponse(response.data.error || 'User not found');
+            else if (response.status === 401) {
+                setAssignAuthResponse(response.data.error || 'Unauthorized: ' + response.data.message);
             }
             else {
                 setAssignAuthResponse(response.data.message || 'Failed to assign authorization');
@@ -63,10 +62,6 @@ const AuthorizationPage = () => {
         }
     };
 
-    const handleGetAllAuth = async () => {
-        getAllAuth();
-    };
-
     if (!user) return (
         <div><h4>Log in to view this page.</h4></div>
     );
@@ -86,7 +81,8 @@ const AuthorizationPage = () => {
                         {/* page description */}
                         <Card.Body>
                             <Card.Title>Page Description</Card.Title>
-                            <Card.Text>This page is a means in order for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles: User and Admin.</Card.Text>
+                            <Card.Text>This page is a means in order for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles: User and Admin.
+                            This is case sensitive, use proper upper case and lower case when inputting both username and authorization.</Card.Text>
                         </Card.Body>
                     </Card>
 
@@ -95,10 +91,6 @@ const AuthorizationPage = () => {
                         <Card.Body>
                             <Card.Title>Assign Authorization</Card.Title>
                             <Form onSubmit={handleSubmit}>
-                                <Form.Group controlId="userID">
-                                    <Form.Label>User ID</Form.Label>
-                                    <Form.Control type="text" name="userID" value={formData.userID} onChange={handleChange} required />
-                                </Form.Group>
                                 <Form.Group controlId="username">
                                     <Form.Label>Username</Form.Label>
                                     <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />

@@ -10,13 +10,6 @@ const authorizationSchema = new mongoose.Schema(
       label: "username",
     },
 
-    userID: 
-    {
-      type: String,
-      required: true,
-      label: "userID",
-    },
-
     authorizationRole: 
     {
       required: true,
