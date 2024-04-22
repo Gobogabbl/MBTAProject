@@ -243,6 +243,14 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8081/cart/increaseOW
+Content-Type: application/json
+
+{
+    "_id" : "66214683f6f2c5e8cb895be0"
+}
+
+###
 POST http://localhost:8081/cart/increaseWP
 Content-Type: application/json
 

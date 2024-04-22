@@ -3,14 +3,13 @@ const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
 router.post("/increaseWP", async (req, res) => {
-    const { _id } = req.body;
+    const { username } = req.body;
 
     try {
-        const user = await shoppingCart.findOne({ _id: _id });
+        const user = await shoppingCart.findOne({ username: username });
         if (!user) {
-            return res.status(404).send("User with userId does not exist.");
+            return res.status(404).send("User with username does not exist.");
         } else {
-            var username = user.username;
             var crOneWay = user.crOneWay;
             var crWeekendPass = user.crWeekendPass;
         }
@@ -23,9 +22,8 @@ router.post("/increaseWP", async (req, res) => {
 
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
-            { _id: _id },
+            { username: username },
             {
-                username: username,
                 crOneWay: crOneWay,
                 crWeekendPass: newWeekendPass
             },
@@ -33,7 +31,7 @@ router.post("/increaseWP", async (req, res) => {
         );
 
         if (!updatedCart) {
-            res.status(404).send("userId does not exist.");
+            res.status(404).send("User does not exist.");
         } else {
             res.json(updatedCart);
         }
