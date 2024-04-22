@@ -49,17 +49,17 @@ router.post('/assignAuth', async (req, res) => {
 
 //ROUTE
 //gets a user's authorization
-router.post("/getAuthById", async (req, res) => {
+router.post("/getAuthByUserName", async (req, res) => {
   try {
-    const { userID } = req.body;
+    const { username } = req.body;
 
-    // Check if userId is provided
-    if (!userID) {
-      return res.status(400).json({ error: "userID is required." });
+    // Check if username is provided
+    if (!username) {
+      return res.status(400).json({ error: "username is required." });
     }
 
     // Find the user's authorization by userID
-    const auth = await authorizationModel.findOne({ userID: userID });
+    const auth = await authorizationModel.findOne({ username: username });
 
     // Check if the authorization exists
     if (!auth) {
@@ -79,11 +79,10 @@ router.post("/getAuthById", async (req, res) => {
 //retrieves all the users and authorizations
 router.get('/getAllAuth', async (req, res) => {
   try {
-    // Use aggregate to group by userID and get the latest authorization entry
     const auth = await authorizationModel.aggregate([
       {
         $group: {
-          _id: '$userID',
+          _id: '$username', // Group by username instead of userID
           latestAuth: { $last: '$$ROOT' } // Get the latest authorization entry for each user
         }
       },

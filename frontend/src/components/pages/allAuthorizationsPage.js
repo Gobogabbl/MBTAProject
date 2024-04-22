@@ -9,7 +9,6 @@ import axios from 'axios';
 const AllAuthorizations = () => {
     const [user, setUser] = useState({});
     const [formData, setFormData] = useState({
-        userID: '',
         username: '',
         authorizationRole: ''
     });
@@ -46,7 +45,7 @@ const AllAuthorizations = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8081/auth/getAuthByID?userID', { userID: formData.userID});
+            const response = await axios.post('http://localhost:8081/auth/getAuthByUserName?username', { username: formData.username});
             if (response.status === 200 || response.status === 201) {
                 setAuthInfo(response.data.auth);
             } else {
@@ -87,8 +86,8 @@ const AllAuthorizations = () => {
                             <Card.Title>Get Specific Authorization</Card.Title>
                             <Form onSubmit={handleSubmit}>
                                 <Form.Group controlId="userID">
-                                    <Form.Label>User ID</Form.Label>
-                                    <Form.Control type="text" name="userID" value={formData.userID} onChange={handleChange} required />
+                                    <Form.Label>User Name</Form.Label>
+                                    <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     Get Authorization
@@ -105,7 +104,6 @@ const AllAuthorizations = () => {
                                     <Card.Text>Error: {authInfo.error}</Card.Text>
                                 ) : (
                                     <>
-                                        <Card.Text>User ID: {authInfo.userID}</Card.Text>
                                         <Card.Text>Username: {authInfo.username}</Card.Text>
                                         <Card.Text>Authorization Role: {authInfo.authorizationRole}</Card.Text>
                                     </>
@@ -126,9 +124,7 @@ const AllAuthorizations = () => {
                             style={{ width: "30rem" }}
                         >
                         <Card.Body>
-                            <Card.Title>Authorization</Card.Title>
-                            <Card.Text>User ID: {auth.userID}</Card.Text>
-                            <Card.Text>Username: {auth.username}</Card.Text>
+                            <Card.Title>Username: {auth.username}</Card.Title>
                             <Card.Text>Authorization Role: {auth.authorizationRole}</Card.Text>
                         </Card.Body>
                             </Card>
