@@ -207,15 +207,15 @@ Content-Type: application/json
 //testing for get methods
 
 ###
-GET http://localhost:8081/cart/getCart/seanpotter045@gmail.com
+GET http://localhost:8081/cart/getCart/new
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getOneWay/66174a7d204238cacfa18140
+GET http://localhost:8081/cart/getOneWay/66259e25303ac9581bf0d978
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getWeekendPass/66174a7d204238cacfa18140
+GET http://localhost:8081/cart/getWeekendPass/66259e25303ac9581bf0d978
 Content-Type: application/json
 
 
@@ -225,7 +225,7 @@ POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###
@@ -233,7 +233,7 @@ POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###
@@ -241,7 +241,7 @@ POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "userID" : "660c3114af2e532e9aa95090"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###
@@ -249,7 +249,7 @@ POST http://localhost:8081/cart/reduceWP
 Content-Type: application/json
 
 {
-    "userID" : "1"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###
@@ -257,7 +257,7 @@ POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "userID" : "66174a7d204238cacfa18140"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###
@@ -265,7 +265,7 @@ POST http://localhost:8081/cart/increaseWP
 Content-Type: application/json
 
 {
-    "userID" : "66174a7d204238cacfa18140"
+    "_id" : "66259e25303ac9581bf0d978"
 }
 
 ###

@@ -3,14 +3,14 @@ const express = require("express");
 const router = express.Router();
 const shoppingCart = require("../models/shoppingCartModel");
 
-router.get('/getWeekendPass/:userId', async (req, res) => {
+router.get('/getWeekendPass/:_id', async (req, res) => {
     try {
-        const userId = req.params.userId; // Get userId from request parameters
-        const isValidObjectId = mongoose.Types.ObjectId.isValid(userId); // Check if userId is a valid ObjectId
+        const _id = req.params._id; // Get userId from request parameters
+        const isValidObjectId = mongoose.Types.ObjectId.isValid(_id); // Check if userId is a valid ObjectId
         if (!isValidObjectId) {
             return res.status(400).send("Invalid userId format."); // Return error if userId is not a valid ObjectId
         }
-        const user = await shoppingCart.findOne({ _id: userId }); // Query using userId as _id
+        const user = await shoppingCart.findOne({ _id: _id }); // Query using userId as _id
         if (!user) {
             return res.status(404).send("User with this userId does not exist.");
         } else {

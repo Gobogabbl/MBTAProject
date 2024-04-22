@@ -3,10 +3,10 @@ const router = express.Router();
 const shoppingCart = require('../models/shoppingCartModel');
 
 router.post("/reduceOW", async (req, res) => {
-    const { userId } = req.body;
+    const { _id } = req.body;
 
     try {
-        const user = await shoppingCart.findOne({ userId: userId });
+        const user = await shoppingCart.findOne({ _id: _id });
         if (!user) {
             return res.status(404).send("User with userId does not exist.");
         } else {
@@ -23,7 +23,7 @@ router.post("/reduceOW", async (req, res) => {
 
     try {
         const updatedCart = await shoppingCart.findOneAndUpdate(
-            { userId: userId },
+            { _id: _id },
             {
                 username: username,
                 crOneWay: newOneWay,
