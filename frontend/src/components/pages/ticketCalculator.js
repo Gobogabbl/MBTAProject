@@ -43,6 +43,15 @@ const StorePage = () => {
         }
     };
 
+    const reduceTickets = async (type) => {
+        try {
+            const response = await axios.post(`http://localhost:8081/cart/reduce${type}`, { username: cart.username });
+            setCart(response.data);
+        } catch (error) {
+            console.error(`Error increasing ${type} tickets:`, error);
+        }
+    };
+
     const calculateTotal = () => {
         if (cart) {
             const oTicketsCost = cart.crOneWay * 2.40;
@@ -75,6 +84,8 @@ const StorePage = () => {
                 </div>
                 <Button variant="primary" onClick={() => increaseTickets('OW')}>Increase One Way Tickets</Button>
                 <Button variant="primary" onClick={() => increaseTickets('WP')}>Increase Weekend Pass Tickets</Button>
+                <Button variant="primary" onClick={() => reduceTickets('OW')}>Reduce One Way Tickets</Button>
+                <Button variant="primary" onClick={() => reduceTickets('WP')}>Reduce Weekend Pass Tickets</Button>
                 <Button variant="primary" onClick={calculateTotal}>Calculate Total</Button>
             </Card.Body>
         </Card>
