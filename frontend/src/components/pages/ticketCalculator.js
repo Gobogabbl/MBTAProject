@@ -60,8 +60,7 @@ const StorePage = () => {
     return (
         <Card style={{ width: '30rem' }} className="mx-2 my-2">
             <Card.Body>
-                <Card.Title>Store Page</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">Select if you would like to increase or decrease a specific type of ticket. You can then calculate the total cost of the tickets.</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">Select if you would like to increase a specific type of ticket. You can then calculate the total cost of the tickets.</Card.Subtitle>
                 <div>
                     {cart ? (
                         <div>
