@@ -91,7 +91,7 @@ function GetUsableTickets() {
                     </div>
                 )}
                 {cart.crOneWay === 0 && cart.crWeekendPass === 0 && (
-                    <p>You have zero tickets, please purchase a ticket to proceed.</p>
+                    <p style={{ color: 'red' }}>You have zero tickets, please purchase a ticket to proceed.</p>
                 )}
                 {successMessage && <p>{successMessage}</p>}
             </Card.Text>
