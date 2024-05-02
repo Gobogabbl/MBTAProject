@@ -4,8 +4,8 @@ import axios from 'axios';
 import getUserInfo from '../../utilities/decodeJwt';
 import Button from 'react-bootstrap/Button';
 
-import oneWayTicketImage from './images/PolarExpressTicket.png';
-import weekendPassImage from './images/ORAS_Eon_Ticket.png';
+import oneWayTicketImage from './images/OneWayTicket.png';
+import weekendPassImage from './images/WeekendPass.png';
 
 function GetUsableTickets() {
     const [user, setUser] = useState({});
