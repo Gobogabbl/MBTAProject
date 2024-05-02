@@ -67,12 +67,8 @@ const AllAuthorizations = () => {
             <div className="container">
                 <div className="text-center">
                     <h3>All Authorizations</h3>
-                    <h4>Current User Information</h4>
-                    <h4>User: <span className='username'>@{username}</span></h4>
-                    <h4>UserID: <span className='userId'>{id}</span></h4>
-                    <h4>Email: <span className='email'>{email}</span></h4>
 
-                    <Card body outline color="success" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                    <Card body outline color="success" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                         {/* page description */}
                         <Card.Body>
                             <Card.Title>Page Description</Card.Title>
@@ -80,7 +76,7 @@ const AllAuthorizations = () => {
                         </Card.Body>
                     </Card>
 
-                    <Card body outline color="success" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                    <Card body outline color="success" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                         {/* Display the necessary authorization text */}
                         <Card.Body>
                             <Card.Title>Get Specific Authorization</Card.Title>
@@ -97,7 +93,7 @@ const AllAuthorizations = () => {
                     </Card>
 
                     {authInfo && (
-                        <Card body outline color="info" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                        <Card body outline color="info" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                             <Card.Body>
                                 <Card.Title>Authorization Information</Card.Title>
                                 {authInfo.error ? (
@@ -120,7 +116,7 @@ const AllAuthorizations = () => {
                             body
                             outline
                             color="info"
-                            className="mx-1 my-2"
+                            className="mx-auto my-2"
                             style={{ width: "30rem" }}
                         >
                         <Card.Body>

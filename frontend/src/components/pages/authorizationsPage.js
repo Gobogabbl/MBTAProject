@@ -72,21 +72,16 @@ const AuthorizationPage = () => {
             <div className="container">
                 <div className="text-center">
                     <h3>Authorizations Page</h3>
-                    <h4>Current User Information</h4>
-                    <h4>User: <span className='username'>@{username}</span></h4>
-                    <h4>UserID: <span className='userId'>{id}</span></h4>
-                    <h4>Email: <span className='email'>{email}</span></h4>
 
-                    <Card body outline color="success" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                    <Card body outline color="success" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                         {/* page description */}
                         <Card.Body>
                             <Card.Title>Page Description</Card.Title>
-                            <Card.Text>This page is a means in order for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles: User and Admin.
-                            This is case sensitive, use proper upper case and lower case when inputting both username and authorization.</Card.Text>
+                            <Card.Text>This page is a means for the admins to see the different roles of each user, showing and/or assigning user roles between the existing roles.</Card.Text>
                         </Card.Body>
                     </Card>
 
-                    <Card body outline color="success" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                    <Card body outline color="success" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                         {/* Display the necessary authorization text */}
                         <Card.Body>
                             <Card.Title>Assign Authorization</Card.Title>
@@ -96,8 +91,12 @@ const AuthorizationPage = () => {
                                     <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />
                                 </Form.Group>
                                 <Form.Group controlId="authorizationRole">
-                                    <Form.Label>Authorization Role</Form.Label>
-                                    <Form.Control type="text" name="authorizationRole" value={formData.authorizationRole} onChange={handleChange} required />
+                                <Form.Label>Authorization Role</Form.Label>
+                                <Form.Control as="select" name="authorizationRole" value={formData.authorizationRole} onChange={handleChange} required>
+                                    <option value="">Select Role</option>
+                                    <option value="User">User</option>
+                                    <option value="Admin">Admin</option>
+                                </Form.Control>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     Assign Authorization
@@ -109,7 +108,7 @@ const AuthorizationPage = () => {
                     
 
                     {assignAuthResponse && (
-                        <Card body outline color="info" className="mx-1 my-2" style={{ width: "30rem", margin: "auto" }}>
+                        <Card body outline color="info" className="mx-auto my-2" style={{ width: "30rem", margin: "auto" }}>
                             <Card.Body>
                                 <Card.Title>Assign Authorization Response</Card.Title>
                                 <Card.Text>{assignAuthResponse}</Card.Text>
