@@ -13,21 +13,24 @@ function GetUsableTickets() {
     const [successMessage, setSuccessMessage] = useState(null);
 
     useEffect(() => {
-        setUser(getUserInfo());
+        const userInfo = getUserInfo();
+        if (userInfo && userInfo.username) {
+            setUser(userInfo);
+        }
     }, []);
 
     useEffect(() => {
         const createCart = async () => {
-            const temp = await axios.get(`http://localhost:8081/cart/getCart/${user.username}`);
-            if (!temp)
-                try {
+            try {
+                const temp = await axios.get(`http://localhost:8081/cart/getCart/${user.username}`);
+                if (!temp.data) {
                     const response = await axios.post('http://localhost:8081/cart/createCart', { username: user.username });
                     setCart(response.data);
-                } catch (error) {
-                    console.error('Error creating cart:', error);
+                } else {
+                    setCart(temp.data);
                 }
-            else {
-                setCart(temp.data)
+            } catch (error) {
+                console.error('Error fetching cart data:', error);
             }
         };
 
@@ -42,7 +45,7 @@ function GetUsableTickets() {
             setSuccessMessage("You have successfully used a One Way ticket. Have a safe ride!");
             setCart(response.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Error reducing One Way ticket:', error);
         }
     };
 
@@ -52,7 +55,7 @@ function GetUsableTickets() {
             setSuccessMessage("You have successfully used a Weekend Pass. Have a safe ride!");
             setCart(response.data);
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Error reducing Weekend Pass:', error);
         }
     };
 
@@ -66,7 +69,7 @@ function GetUsableTickets() {
         }
     }, [successMessage]);
 
-    if (!user) return (<div><h4>Log in to view this page.</h4></div>);
+    if (!user.username) return <div><h4>Log in to view this page.</h4></div>;
 
     return (
         <div className="col-md-12 text-center">
