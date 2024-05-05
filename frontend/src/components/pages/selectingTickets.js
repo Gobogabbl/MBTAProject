@@ -42,8 +42,7 @@ const SelectingTickets = () => {
 
     const increaseOW = async () => {
         try {
-            const newCount = crOneWay + 1;
-            setCROneWay(newCount);
+            setCROneWay(crOneWay + 1);
             calculateTotal(newCount, crWeekendPass);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -52,8 +51,7 @@ const SelectingTickets = () => {
 
     const increaseWP = async () => {
         try {
-            const newCount = crWeekendPass + 1;
-            setCRWeekendPass(newCount);
+            setCRWeekendPass(crWeekendPass + 1);
             calculateTotal(crOneWay, newCount);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -62,8 +60,7 @@ const SelectingTickets = () => {
 
     const reduceOW = async () => {
         try {
-            const newCount = crOneWay - 1;
-            setCROneWay(newCount);
+            setCROneWay(crOneWay - 1);
             calculateTotal(newCount, crWeekendPass);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -72,8 +69,7 @@ const SelectingTickets = () => {
 
     const reduceWP = async () => {
         try {
-            const newCount = crWeekendPass - 1;
-            setCRWeekendPass(newCount);
+            setCRWeekendPass(crWeekendPass - 1);
             calculateTotal(crOneWay, newCount);
         } catch (error) {
             console.error('Error fetching data:', error);
