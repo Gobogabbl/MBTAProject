@@ -73,28 +73,34 @@ function GetUsableTickets() {
 
     return (
         <div className="col-md-12 text-center">
-            <h1>Which ticket would you like to use?</h1>
-            <Button variant="info" onClick={reduceOW} disabled={cart.crOneWay === 0}>One Way</Button>
-            <Button variant="warning" onClick={reduceWP} disabled={cart.crWeekendPass === 0}>Weekend Pass</Button>
+            <h1>Select the ticket type you want to use</h1>
+            <Button variant="info" onClick={reduceOW} disabled={cart.crOneWay === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>One Way</Button>
+            <Button variant="warning" onClick={reduceWP} disabled={cart.crWeekendPass === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>Weekend Pass</Button>
             <Card.Text>
-                <p>Number of available One Way tickets: {cart.crOneWay}</p>
-                {cart.crOneWay > 0 && (
-                    <div>
-                        {[...Array(cart.crOneWay)].map((_, index) => (
-                            <img key={index} src={oneWayTicketImage} alt="One Way Ticket" style={{ width: '100px', height: 'auto', margin: '5px' }} />
-                        ))}
+                <div style={{ display: 'flex' }}>
+                    <div style={{ flex: '1', textAlign: 'center', padding: '10px' }}>
+                        <p style={{ marginBottom: '0' }}>Number of available One Way tickets: {cart.crOneWay}</p>
+                        {cart.crOneWay > 0 && (
+                            <div>
+                                {[...Array(cart.crOneWay)].map((_, index) => (
+                                    <img key={index} src={oneWayTicketImage} alt="One Way Ticket" style={{ width: '100px', height: 'auto', margin: '5px' }} />
+                                ))}
+                            </div>
+                        )}
                     </div>
-                )}
-                <p>Number of available Weekend Passes: {cart.crWeekendPass}</p>
-                {cart.crWeekendPass > 0 && (
-                    <div>
-                        {[...Array(cart.crWeekendPass)].map((_, index) => (
-                            <img key={index} src={weekendPassImage} alt="Weekend Pass" style={{ width: '100px', height: 'auto', margin: '5px' }} />
-                        ))}
+                    <div style={{ flex: '1', textAlign: 'center', padding: '10px' }}>
+                        <p style={{ marginBottom: '0' }}>Number of available Weekend Passes: {cart.crWeekendPass}</p>
+                        {cart.crWeekendPass > 0 && (
+                            <div>
+                                {[...Array(cart.crWeekendPass)].map((_, index) => (
+                                    <img key={index} src={weekendPassImage} alt="Weekend Pass" style={{ width: '100px', height: 'auto', margin: '5px' }} />
+                                ))}
+                            </div>
+                        )}
                     </div>
-                )}
-                {cart.crOneWay === 0 && cart.crWeekendPass === 0 && (
-                    <p style={{ color: 'red' }}>You have zero tickets, please purchase a ticket to proceed.</p>
+                </div>
+                {(cart.crOneWay === 0 && cart.crWeekendPass === 0) && (
+                    <p style={{ color: 'red', fontWeight: 'bold' }}>You have zero tickets, please purchase a ticket to proceed.</p>
                 )}
                 {successMessage && <p>{successMessage}</p>}
             </Card.Text>
