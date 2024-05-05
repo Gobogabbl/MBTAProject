@@ -3,6 +3,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import mbtaSymbol from './images/MBTASymbol.png';
 
 const SelectingTickets = () => {
     const [user, setUser] = useState({});
@@ -161,6 +162,7 @@ const SelectingTickets = () => {
                     </div>
                 </Card.Body>
             </Card>
+            <img src={mbtaSymbol} alt="MBTA Symbol" style={{ marginTop: '20px', maxWidth: '200px' }} />
         </div>
     );           
 };
