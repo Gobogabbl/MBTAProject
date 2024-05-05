@@ -42,7 +42,7 @@ function GetUsableTickets() {
     const reduceOW = async () => {
         try {
             const response = await axios.post('http://localhost:8081/cart/reduceOW', { username: cart.username });
-            setSuccessMessage("You have successfully used a One Way ticket. Have a safe ride!");
+            setSuccessMessage(<p style={{ color: '#004d99', fontWeight: 'bold' }}>You have successfully used a One Way ticket. Have a safe ride!</p>);
             setCart(response.data);
         } catch (error) {
             console.error('Error reducing One Way ticket:', error);
@@ -52,7 +52,7 @@ function GetUsableTickets() {
     const reduceWP = async () => {
         try {
             const response = await axios.post('http://localhost:8081/cart/reduceWP', { username: cart.username });
-            setSuccessMessage("You have successfully used a Weekend Pass. Have a safe ride!");
+            setSuccessMessage(<p style={{ color: '#004d99', fontWeight: 'bold' }}>You have successfully used a Weekend Pass. Have a safe ride!</p>);
             setCart(response.data);
         } catch (error) {
             console.error('Error reducing Weekend Pass:', error);
@@ -73,7 +73,7 @@ function GetUsableTickets() {
 
     return (
         <div className="col-md-12 text-center">
-            <h1>Select the ticket type you want to use</h1>
+            <h1>Which ticket would you like to use?</h1>
             <Button variant="info" onClick={reduceOW} disabled={cart.crOneWay === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>One Way</Button>
             <Button variant="warning" onClick={reduceWP} disabled={cart.crWeekendPass === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>Weekend Pass</Button>
             <Card.Text>
@@ -102,7 +102,7 @@ function GetUsableTickets() {
                 {(cart.crOneWay === 0 && cart.crWeekendPass === 0) && (
                     <p style={{ color: 'red', fontWeight: 'bold' }}>You have zero tickets, please purchase a ticket to proceed.</p>
                 )}
-                {successMessage && <p>{successMessage}</p>}
+                {successMessage}
             </Card.Text>
         </div>
     );
