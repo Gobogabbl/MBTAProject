@@ -5,6 +5,7 @@ import MbtaAlertsPage from "./components/pages/mbtaAlerts";
 import MbtaAPIFunctionPage from "./components/pages/mbtaAPIFunction";
 import AuthorizationPage from "./components/pages/authorizationsPage";
 import TicketCalculator from "./components/pages/ticketCalculator";
+import SelectingTickets from "./components/pages/selectingTickets";
 import UseTickets from "./components/pages/useATicketPage";
 import AllAuthorizations from "./components/pages/allAuthorizationsPage";
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route exact path="/mbtaAlerts" element={<MbtaAlertsPage />} />
           <Route exact path="/mbtaAPIFunction" element={<MbtaAPIFunctionPage />} />
           <Route exact path="/ticketCalculator" element={<TicketCalculator />} />
+          <Route exact path="/selectingTickets" element={<SelectingTickets />} />
           <Route exact path="/authorizationsPage" element={<AuthorizationPage />} />
           <Route exact path="/allAuthorizationsPage" element={<AllAuthorizations />}/>
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />

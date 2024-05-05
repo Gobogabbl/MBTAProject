@@ -186,6 +186,16 @@ Content-Type: application/json
     "username" : "new"
 }
 
+###
+PUT http://localhost:8081/cart/editCart
+Content-Type: application/json
+
+{
+    "username" : "new",
+    "crOneWay" : 2,
+    "crWeekendPass" : 3
+}
+
 //testing for get methods
 
 ###
@@ -193,11 +203,11 @@ GET http://localhost:8081/cart/getCart/new
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getOneWay/66259e25303ac9581bf0d978
+GET http://localhost:8081/cart/getOneWay/new
 Content-Type: application/json
 
 ###
-GET http://localhost:8081/cart/getWeekendPass/66259e25303ac9581bf0d978
+GET http://localhost:8081/cart/getWeekendPass/new
 Content-Type: application/json
 
 
@@ -207,7 +217,7 @@ POST http://localhost:8081/cart/clearCart
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
@@ -215,7 +225,7 @@ POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
@@ -223,7 +233,7 @@ POST http://localhost:8081/cart/reduceOW
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
@@ -231,7 +241,7 @@ POST http://localhost:8081/cart/reduceWP
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
@@ -239,7 +249,7 @@ POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
@@ -247,7 +257,7 @@ POST http://localhost:8081/cart/increaseOW
 Content-Type: application/json
 
 {
-    "_id" : "66214683f6f2c5e8cb895be0"
+    "username" : "new"
 }
 
 ###
@@ -255,7 +265,7 @@ POST http://localhost:8081/cart/increaseWP
 Content-Type: application/json
 
 {
-    "_id" : "66259e25303ac9581bf0d978"
+    "username" : "new"
 }
 
 ###
