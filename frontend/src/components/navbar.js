@@ -27,7 +27,6 @@ export default function Navbar() {
         <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/privateUserProfile">Profile</Nav.Link>
         <Nav.Link href="/mbtaAlerts">MBTA Alerts</Nav.Link>
-        <Nav.Link href="/mbtaAPIFunction">MBTA API</Nav.Link>
         <Nav.Link href="/selectingTickets">Selecting Tickets</Nav.Link>
         <Nav.Link href="/authorizationsPage">Authorizations</Nav.Link>
         <Nav.Link href="/allAuthorizationsPage">All Authorizations</Nav.Link>
