@@ -77,6 +77,10 @@ function GetUsableTickets() {
             <Button variant="info" onClick={reduceOW} disabled={cart.crOneWay === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>One Way</Button>
             <Button variant="warning" onClick={reduceWP} disabled={cart.crWeekendPass === 0} style={{ fontSize: '1.2rem', padding: '10px 20px' }}>Weekend Pass</Button>
             <Card.Text>
+            {(cart.crOneWay === 0 && cart.crWeekendPass === 0) && (
+                    <p style={{ color: 'red', fontWeight: 'bold' }}>You have zero tickets, please purchase a ticket to proceed.</p>
+                )}
+                {successMessage}
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: '1', textAlign: 'center', padding: '10px' }}>
                         <p style={{ marginBottom: '0' }}>Number of available One Way tickets: {cart.crOneWay}</p>
@@ -88,10 +92,10 @@ function GetUsableTickets() {
                             </div>
                         )}
                     </div>
-                    <div style={{ flex: '1', textAlign: 'center', padding: '10px' }}>
+                    <div style={{ flex: '1', textAlign: 'center', padding: '10px', margin: '-5px 0' }}>
                         <p style={{ marginBottom: '0' }}>Number of available Weekend Passes: {cart.crWeekendPass}</p>
                         {cart.crWeekendPass > 0 && (
-                            <div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                                 {[...Array(cart.crWeekendPass)].map((_, index) => (
                                     <img key={index} src={weekendPassImage} alt="Weekend Pass" style={{ width: '100px', height: 'auto', margin: '5px' }} />
                                 ))}
@@ -99,10 +103,6 @@ function GetUsableTickets() {
                         )}
                     </div>
                 </div>
-                {(cart.crOneWay === 0 && cart.crWeekendPass === 0) && (
-                    <p style={{ color: 'red', fontWeight: 'bold' }}>You have zero tickets, please purchase a ticket to proceed.</p>
-                )}
-                {successMessage}
             </Card.Text>
         </div>
     );
