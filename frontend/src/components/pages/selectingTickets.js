@@ -13,7 +13,7 @@ const SelectingTickets = () => {
     const [crWeekendPass, setCRWeekendPass] = useState(0);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false);
     const [confirmationMessage, setConfirmationMessage] = useState('');
-
+    const [purchaseSuccessMessage, setPurchaseSuccessMessage] = useState('');
 
     useEffect(() => {
         const user = getUserInfo();
@@ -100,9 +100,13 @@ const SelectingTickets = () => {
             setCart(response.data)
             setCROneWay(0)
             setCRWeekendPass(0)
-            // Optionally, you can display a success message to the user
             setShowConfirmationModal(false);
             setConfirmationMessage('');
+
+            setPurchaseSuccessMessage("Tickets have been added to your cart.");
+            setTimeout(() => {
+                setPurchaseSuccessMessage('');
+            }, 5000);
         } catch (error) {
             console.error('Error purchasing tickets:', error);
         }
@@ -129,15 +133,15 @@ const SelectingTickets = () => {
 
     
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                        <Button variant="primary" onClick={increaseOW} style={{ marginRight: '10px', minWidth: '150px' }}>Increase One Way Tickets</Button>
-                        <Button variant="primary" onClick={increaseWP} style={{ marginRight: '10px', minWidth: '150px' }}>Increase Weekend Pass Tickets</Button>
-                        <Button variant="primary" onClick={reduceOW} style={{ marginRight: '10px', minWidth: '150px' }} disabled={crOneWay === 0}>Reduce One Way Tickets</Button>
-                        <Button variant="primary" onClick={reduceWP} style={{ minWidth: '150px' }} disabled={crWeekendPass === 0}>Reduce Weekend Pass Tickets</Button>
+                        <Button variant="primary" onClick={increaseOW} style={{ marginRight: '10px', minWidth: '150px' }} disabled={showConfirmationModal}>Increase One Way Tickets</Button>
+                        <Button variant="primary" onClick={increaseWP} style={{ marginRight: '10px', minWidth: '150px' }} disabled={showConfirmationModal}>Increase Weekend Pass Tickets</Button>
+                        <Button variant="primary" onClick={reduceOW} style={{ marginRight: '10px', minWidth: '150px' }} disabled={showConfirmationModal || crOneWay === 0}>Reduce One Way Tickets</Button>
+                        <Button variant="primary" onClick={reduceWP} style={{ minWidth: '150px' }} disabled={showConfirmationModal || crWeekendPass === 0}>Reduce Weekend Pass Tickets</Button>
                     </div>
     
                     {/* Purchase Tickets button */}
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-                        <Button variant="primary" onClick={handlePurchaseConfirmation} disabled={crOneWay === 0 & crWeekendPass === 0} style={{ minWidth: '200px' }}>Purchase Tickets</Button>
+                    <Button variant="primary" onClick={handlePurchaseConfirmation} disabled={showConfirmationModal || (crOneWay === 0 && crWeekendPass === 0)} style={{ minWidth: '200px' }}>Purchase Tickets</Button>
                     </div>
     
                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -154,6 +158,9 @@ const SelectingTickets = () => {
                                     </div>
                                 </Card.Body>
                             </Card>
+                        )}
+                        {purchaseSuccessMessage && (
+                            <div style={{ marginTop: '10px', textAlign: 'center', color: 'blue' }}>{purchaseSuccessMessage}</div>
                         )}
                     </div>
                 </Card.Body>
