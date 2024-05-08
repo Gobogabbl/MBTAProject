@@ -5,7 +5,7 @@ const shoppingCart = require('../models/shoppingCartModel');
 router.post("/increaseWP", async (req, res) => {
     const { username } = req.body;
 
-    try {
+    try { //Finding user
         const user = await shoppingCart.findOne({ username: username });
         if (!user) {
             return res.status(404).send("User with username does not exist.");
@@ -20,7 +20,7 @@ router.post("/increaseWP", async (req, res) => {
 
     var newWeekendPass = crWeekendPass + 1;
 
-    try {
+    try { //Editing user
         const updatedCart = await shoppingCart.findOneAndUpdate(
             { username: username },
             {

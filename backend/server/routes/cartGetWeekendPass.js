@@ -5,8 +5,8 @@ const shoppingCart = require("../models/shoppingCartModel");
 
 router.get('/getWeekendPass/:username', async (req, res) => {
     try {
-        const username = req.params.username; // Get userId from request parameters
-        const user = await shoppingCart.findOne({ username: username }); // Query using userId as _id
+        const username = req.params.username;
+        const user = await shoppingCart.findOne({ username: username });
         if (!user) {
             return res.status(404).send("User with this username does not exist.");
         } else {

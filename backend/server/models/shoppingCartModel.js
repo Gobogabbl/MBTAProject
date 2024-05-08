@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-//shoppingCart schema/model
 const shoppingCartSchema = new mongoose.Schema(
   {
     username: {
@@ -9,13 +8,13 @@ const shoppingCartSchema = new mongoose.Schema(
       label: "username",
     },
     
-    crOneWay: {
+    crOneWay: { //One Way Passes, a type of ticket
         type: Number,
         required: true,
         label: "quantity",
     },
 
-    crWeekendPass: {
+    crWeekendPass: { //Weekend Passes, a separate type of ticket
       type: Number,
       required: true,
       label: "quantity",

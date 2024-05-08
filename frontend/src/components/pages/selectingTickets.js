@@ -103,6 +103,7 @@ const SelectingTickets = () => {
             setShowConfirmationModal(false);
             setConfirmationMessage('');
 
+            //Creates disappearing message
             setPurchaseSuccessMessage("Tickets have been added to your cart.");
             setTimeout(() => {
                 setPurchaseSuccessMessage('');
@@ -130,8 +131,8 @@ const SelectingTickets = () => {
                         <p>Loading cart...</p>
                     )}
                 </div>
-
-    
+                    
+                    {/*Buttons for increasing/decreasing tickets*/}
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                         <Button variant="primary" onClick={increaseOW} style={{ marginRight: '10px', minWidth: '150px' }} disabled={showConfirmationModal}>Increase One Way Tickets</Button>
                         <Button variant="primary" onClick={increaseWP} style={{ marginRight: '10px', minWidth: '150px' }} disabled={showConfirmationModal}>Increase Weekend Pass Tickets</Button>
@@ -139,11 +140,12 @@ const SelectingTickets = () => {
                         <Button variant="primary" onClick={reduceWP} style={{ minWidth: '150px' }} disabled={showConfirmationModal || crWeekendPass === 0}>Reduce Weekend Pass Tickets</Button>
                     </div>
     
-                    {/* Purchase Tickets button */}
+                    {/*"Purchase Tickets" button*/}
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
                     <Button variant="primary" onClick={handlePurchaseConfirmation} disabled={showConfirmationModal || (crOneWay === 0 && crWeekendPass === 0)} style={{ minWidth: '200px' }}>Purchase Tickets</Button>
                     </div>
     
+                    {/*Deals with message windows that pop up*/}
                     <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         {showConfirmationModal && (
                             <Card style={{ width: '30rem' }} className="mx-2 my-2">
