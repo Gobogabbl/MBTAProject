@@ -100,6 +100,7 @@ const SelectingTickets = () => {
             setCart(response.data)
             setCROneWay(0)
             setCRWeekendPass(0)
+            setTotalCost(0)
             setShowConfirmationModal(false);
             setConfirmationMessage('');
 
